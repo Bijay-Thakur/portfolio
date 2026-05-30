@@ -8,7 +8,12 @@ import GradientText from "@/components/ui/GradientText";
 import Button from "@/components/ui/Button";
 import ProjectCard from "@/components/projects/ProjectCard";
 import FooterCTA from "@/components/layout/FooterCTA";
-import { featuredProject, headlineProjects, supportingProjects } from "@/data/projects";
+import {
+  featuredProject,
+  headlineProjects,
+  supportingProjects,
+  earlyProjects,
+} from "@/data/projects";
 import { siteConfig } from "@/data/portfolio";
 
 const fadeUp = {
@@ -47,9 +52,8 @@ export default function ProjectsPage() {
                 <GradientText>think, build, and solve.</GradientText>
               </h1>
               <p className="text-slate-500 text-lg leading-relaxed">
-                Selected AI/ML and software projects — built beyond demos, with retrieval
-                systems, multi-LLM workflows, agent orchestration, applied ML, and honest
-                evaluation.
+                Selected AI/ML, GenAI, and software projects grounded in measurable systems,
+                honest evaluation, and practical product thinking.
               </p>
             </motion.div>
           </div>
@@ -66,10 +70,10 @@ export default function ProjectsPage() {
               {loveBuilding.map((item) => (
                 <div
                   key={item.label}
-                  className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50"
+                  className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50"
                 >
-                  <span className="text-blue-600">{item.icon}</span>
-                  <span className="text-sm text-slate-700 font-medium">{item.label}</span>
+                  <span className="text-blue-600 mt-0.5 flex-shrink-0">{item.icon}</span>
+                  <span className="text-sm text-slate-700 font-medium leading-snug">{item.label}</span>
                 </div>
               ))}
             </div>
@@ -168,14 +172,39 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Supporting Projects */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
+      {/* Other Strong Builds */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
         <div className="mb-6">
           <SectionBadge className="mb-3">More builds</SectionBadge>
-          <h2 className="text-xl font-bold text-slate-900">Other projects</h2>
+          <h2 className="text-xl font-bold text-slate-900">Other strong builds</h2>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {supportingProjects.map((project, i) => (
+            <motion.div
+              key={project.slug}
+              custom={i}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <ProjectCard project={project} className="h-full" />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Early / Archived */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
+        <div className="mb-6">
+          <SectionBadge className="mb-3">Archive</SectionBadge>
+          <h2 className="text-xl font-bold text-slate-900">Early / archived</h2>
+          <p className="text-sm text-slate-500 mt-2 max-w-2xl">
+            Smaller or early-stage repos kept with conservative copy until README evidence grows.
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-xl">
+          {earlyProjects.map((project, i) => (
             <motion.div
               key={project.slug}
               custom={i}

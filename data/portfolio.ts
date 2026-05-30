@@ -73,7 +73,7 @@ export const experiences: Experience[] = [
   {
     role: "AI Agent Builder Intern",
     company: "NeuralSeek",
-    date: "May 2024 – Aug 2024",
+    date: "April 2026 – May 2026",
     bullets: [
       "Built custom AI agents using LangChain, RAG, and tool-use.",
       "Integrated vector databases and APIs for real-time actions.",
@@ -87,7 +87,7 @@ export const experiences: Experience[] = [
   {
     role: "Web Development Intern",
     company: "WebX Nepal",
-    date: "Jan 2024 – Apr 2024",
+    date: "March 2022 – July 2022",
     bullets: [
       "Developed responsive web applications with React and Next.js.",
       "Built and integrated RESTful APIs with Node.js and MongoDB.",
@@ -101,7 +101,7 @@ export const experiences: Experience[] = [
   {
     role: "Graphic Designer Intern",
     company: "Office of Assembly Member Steven Raga",
-    date: "Jun 2023 – Aug 2023",
+    date: "October 2024 – January 2025",
     bullets: [
       "Designed social media content, flyers, and campaign materials.",
       "Created branded visuals aligned with community initiatives.",
@@ -115,7 +115,7 @@ export const experiences: Experience[] = [
   {
     role: "Academic Tutor",
     company: "Queens College",
-    date: "Jan 2023 – May 2023",
+    date: "February 2024 – June 2024",
     bullets: [
       "Tutored students in Data Structures, Python, and Discrete Math.",
       "Simplified complex concepts with hands-on examples.",

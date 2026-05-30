@@ -58,8 +58,8 @@ export default function ProjectCard({
       )}
     >
       {/* Thumbnail */}
-      <div className="h-24 bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-between px-5 border-b border-slate-100">
-        <div className="flex items-center gap-3">
+      <div className="min-h-[56px] py-3 bg-gradient-to-br from-slate-50 to-blue-50 flex flex-wrap items-center gap-x-3 gap-y-2 px-4 sm:px-5 border-b border-slate-100">
+        <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center shadow-sm flex-shrink-0">
             <span className="text-white text-xs font-bold">
               {project.shortTitle.substring(0, 2).toUpperCase()}
@@ -69,7 +69,7 @@ export default function ProjectCard({
             <p className="text-xs text-slate-400">{project.category}</p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="ml-auto flex items-center gap-1.5 flex-wrap">
           {hasMetrics && (
             <span className="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full bg-green-50 text-green-700 border border-green-100">
               <CheckCircle size={10} /> Verified metrics

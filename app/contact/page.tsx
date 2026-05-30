@@ -110,7 +110,7 @@ export default function ContactPage() {
             {/* Direct contact */}
             <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
               <p className="text-sm font-semibold text-slate-900 mb-4">Direct contact</p>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-3">
                 {directContacts.map((contact) => (
                   <a
                     key={contact.label}
