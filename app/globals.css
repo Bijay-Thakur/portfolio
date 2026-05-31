@@ -1,29 +1,63 @@
 @import "tailwindcss";
 
-:root {
-  --background: #fafafa;
-  --foreground: #0f172a;
-}
-
+/* ── Ocean teal palette ────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Backgrounds */
+  --color-ocean:   #040D16;
+  --color-ocean-2: #071828;
+  --color-ocean-3: #0A2236;
+
+  /* Accent – bright bioluminescent teal */
+  --color-teal:       #0DD6C8;
+  --color-teal-light: #5EEEE6;
+  --color-teal-dim:   #0A8F86;
+
+  /* Text */
+  --color-snow:  #E4F6F8;
+  --color-muted: #5B8FA8;
+
+  /* Fonts */
+  --font-serif: var(--font-cormorant);
+  --font-sans:  var(--font-inter);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans, system-ui, sans-serif);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+:root {
+  --background: #040D16;
+  --foreground: #E4F6F8;
+
+  /* convenience shorthands used in inline rgba() calls */
+  --rgb-teal: 13, 214, 200;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
 * {
   box-sizing: border-box;
 }
+
+/* Profile image wave ripple */
+@keyframes ripple-wave {
+  0%   { transform: scale(1);    opacity: 0.45; }
+  100% { transform: scale(1.75); opacity: 0; }
+}
+.ripple-ring {
+  animation: ripple-wave 3s ease-out infinite;
+}
+.ripple-ring-2 { animation-delay: 1s; }
+.ripple-ring-3 { animation-delay: 2s; }
+
+/* Scrollbar */
+::-webkit-scrollbar            { width: 5px; }
+::-webkit-scrollbar-track      { background: #040D16; }
+::-webkit-scrollbar-thumb      { background: rgba(13,214,200,0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover{ background: rgba(13,214,200,0.5); }

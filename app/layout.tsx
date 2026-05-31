@@ -1,26 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Bijay Thakur | AI/ML Engineer Portfolio",
+  title: "Bijay Thakur | AI/ML Engineer",
   description:
-    "Portfolio of Bijay Thakur, a Computer Science student focused on AI/ML engineering, GenAI systems, and practical software development.",
+    "Portfolio of Bijay Thakur — AI/ML Engineer, GenAI Systems Builder, Computer Science @ Queens College. Building research-driven AI systems, RAG pipelines, and practical ML products.",
   openGraph: {
-    title: "Bijay Thakur | AI/ML Engineer Portfolio",
+    title: "Bijay Thakur | AI/ML Engineer",
     description:
-      "Portfolio of Bijay Thakur, a Computer Science student focused on AI/ML engineering, GenAI systems, and practical software development.",
+      "Building research-driven AI systems, RAG pipelines, and practical ML products with real-world utility.",
     type: "website",
   },
 };
@@ -31,13 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
-      <body className="min-h-screen bg-[#fafafa] text-slate-900">
-        <Header />
-        <main>{children}</main>
+    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
+      <body className="min-h-screen bg-ocean text-snow">
+        {children}
       </body>
     </html>
   );

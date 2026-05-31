@@ -1,4 +1,4 @@
-import { CheckCircle, TrendingUp, Calendar } from "lucide-react";
+import { CheckCircle, Calendar } from "lucide-react";
 import { type Experience } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -16,54 +16,31 @@ export default function ExperienceCard({
   return (
     <div
       className={cn(
-        "bg-white rounded-2xl border border-slate-100 shadow-sm p-6 flex flex-col gap-5",
+        "bg-[rgba(255,255,255,0.03)] border border-[rgba(201,168,76,0.1)] rounded-lg p-5",
         className
       )}
     >
-      {/* Header */}
       <div className="flex items-start gap-4">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white text-sm font-bold shadow-sm flex-shrink-0">
+        <div className="w-8 h-8 rounded-full bg-[rgba(201,168,76,0.1)] border border-[rgba(201,168,76,0.2)] flex items-center justify-center text-gold text-xs font-bold flex-shrink-0">
           {String(index + 1).padStart(2, "0")}
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-slate-900 leading-snug">{experience.role}</h3>
-          <p className="text-blue-600 text-sm font-medium mt-0.5">{experience.company}</p>
-          <div className="flex items-center gap-1.5 mt-1.5 text-slate-400 text-xs">
+          <h3 className="font-semibold text-parchment leading-snug">{experience.role}</h3>
+          <p className="text-gold/70 text-sm font-medium mt-0.5">{experience.org}</p>
+          <div className="flex items-center gap-1.5 mt-1.5 text-muted text-xs">
             <Calendar size={12} />
-            {experience.date}
+            {experience.dates}
           </div>
         </div>
       </div>
-
-      {/* What I did */}
-      <div>
-        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
-          What I did
-        </p>
-        <ul className="space-y-1.5">
-          {experience.bullets.map((bullet, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-              <CheckCircle size={13} className="text-blue-500 flex-shrink-0 mt-0.5" />
-              {bullet}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Impact */}
-      <div className="bg-slate-50 rounded-xl p-3.5">
-        <div className="flex items-center gap-1.5 mb-2">
-          <TrendingUp size={13} className="text-violet-500" />
-          <p className="text-xs font-semibold text-violet-600 uppercase tracking-wide">Impact</p>
-        </div>
-        <ul className="space-y-1">
-          {experience.impact.map((item, i) => (
-            <li key={i} className="text-sm text-slate-600 font-medium">
-              · {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="space-y-1.5 mt-4">
+        {experience.bullets.map((bullet, i) => (
+          <li key={i} className="flex items-start gap-2 text-sm text-muted">
+            <CheckCircle size={13} className="text-gold/50 flex-shrink-0 mt-0.5" />
+            {bullet}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
