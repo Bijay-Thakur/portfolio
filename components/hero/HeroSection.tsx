@@ -54,12 +54,12 @@ export default function HeroSection() {
         <div className="min-h-[34svh] sm:min-h-[38svh] lg:block lg:min-h-0" aria-hidden="true" />
 
         {/* Right headline + actions */}
-        <div className="pointer-events-auto mb-5 max-w-md rounded-3xl bg-[#020a12]/45 p-4 text-center backdrop-blur-[2px] sm:mb-8 lg:mb-0 lg:ml-auto lg:bg-transparent lg:p-0 lg:text-left lg:backdrop-blur-0">
+        <div className="pointer-events-auto mb-5 max-w-md rounded-3xl bg-[#020a12]/45 p-4 text-center backdrop-blur-[2px] sm:mb-8 lg:mb-0 lg:ml-auto lg:bg-transparent lg:p-0 lg:text-center lg:backdrop-blur-0">
           <h1 className="hero-reveal hero-reveal-delay-1 font-serif text-xl font-semibold uppercase leading-[1.1] tracking-tight text-white min-[390px]:text-2xl sm:text-3xl lg:text-4xl">
             <span className="typewriter-text">Building Intelligent System</span>
           </h1>
 
-          <div className="hero-reveal hero-reveal-delay-2 mt-5 flex flex-wrap justify-center gap-2.5 sm:mt-8 sm:gap-3 lg:justify-start">
+          <div className="hero-reveal hero-reveal-delay-2 mt-5 flex flex-wrap justify-center gap-2.5 sm:mt-8 sm:gap-3">
             <button
               onClick={scrollToProjects}
               className="rounded-full bg-[#0dd6c8] px-5 py-2.5 text-xs font-semibold text-[#020a12] shadow-[0_0_30px_rgba(13,214,200,0.24)] transition hover:bg-[#8ff7ee] focus:outline-none focus:ring-2 focus:ring-[#8ff7ee]/70 sm:px-6 sm:py-3 sm:text-sm"
@@ -76,7 +76,7 @@ export default function HeroSection() {
             </a>
           </div>
 
-          <div className="hero-reveal hero-reveal-delay-3 mt-5 flex items-center justify-center gap-5 sm:mt-8 lg:justify-start">
+          <div className="hero-reveal hero-reveal-delay-3 mt-5 flex items-center justify-center gap-5 sm:mt-8">
             <a
               href={siteConfig.github}
               target="_blank"
