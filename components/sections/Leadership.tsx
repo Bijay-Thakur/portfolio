@@ -6,7 +6,7 @@ import { leadership } from "@/data/portfolio";
 
 export default function Leadership() {
   return (
-    <section id="leadership" className="py-24 px-4 max-w-6xl mx-auto">
+    <section id="leadership" className="py-16 md:py-24 px-4 max-w-6xl mx-auto">
       <SectionDivider label="Leadership & Involvement" />
 
       <motion.h2
@@ -14,12 +14,12 @@ export default function Leadership() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="font-serif text-4xl font-semibold text-snow mb-14"
+        className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-10 sm:mb-14"
       >
         Leadership & Involvement
       </motion.h2>
 
-      <div className="grid sm:grid-cols-2 gap-5">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         {leadership.map((item, i) => (
           <motion.div
             key={item.title}
@@ -27,7 +27,7 @@ export default function Leadership() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.38, delay: i * 0.07, ease: "easeOut" }}
-            className="bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-5 hover:border-[rgba(13,214,200,0.28)] transition-colors"
+            className="min-w-0 bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-4 sm:p-5 hover:border-[rgba(13,214,200,0.28)] transition-colors"
           >
             <h3 className="font-semibold text-snow text-base">{item.title}</h3>
             <p className="text-teal/60 text-xs mt-0.5 mb-3">

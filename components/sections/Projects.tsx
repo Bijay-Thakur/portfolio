@@ -14,13 +14,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       viewport={{ once: true, amount: 0.08 }}
       transition={{ duration: 0.38, delay: index * 0.05, ease: "easeOut" }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className="group flex flex-col h-full bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-6 hover:border-[rgba(13,214,200,0.35)] hover:shadow-[0_4px_30px_rgba(13,214,200,0.07)] transition-[border-color,box-shadow] duration-300"
+      className="group flex h-full min-w-0 flex-col rounded-lg border border-[rgba(13,214,200,0.1)] bg-[rgba(13,214,200,0.03)] p-5 transition-[border-color,box-shadow] duration-300 hover:border-[rgba(13,214,200,0.35)] hover:shadow-[0_4px_30px_rgba(13,214,200,0.07)] sm:p-6"
     >
       <p className="text-[10px] tracking-[0.2em] uppercase text-teal/60 mb-2 font-medium">
         {project.category}
       </p>
 
-      <h3 className="font-serif text-xl font-semibold text-snow mb-3 group-hover:text-teal-light transition-colors">
+      <h3 className="font-serif text-lg sm:text-xl font-semibold text-snow mb-3 group-hover:text-teal-light transition-colors">
         {project.title}
       </h3>
 
@@ -71,31 +71,31 @@ const sectionAnim = {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-4 max-w-6xl mx-auto">
+    <section id="projects" className="py-16 md:py-24 px-4 max-w-6xl mx-auto">
       <SectionDivider label="Featured Projects" />
 
       <motion.div {...sectionAnim} className="mb-10">
-        <h2 className="font-serif text-4xl font-semibold text-snow mb-3">Featured Projects</h2>
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">Featured Projects</h2>
         <p className="text-muted text-sm max-w-xl">
           Five headline projects spanning RAG, multi-LLM orchestration, multi-agent systems,
           applied ML, and GenAI media workflows.
         </p>
       </motion.div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-24">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 mb-20 md:mb-24">
         {featuredProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
       </div>
 
       <SectionDivider label="Other Projects" />
 
       <motion.div {...sectionAnim} className="mb-10">
-        <h2 className="font-serif text-4xl font-semibold text-snow mb-3">Other Projects</h2>
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">Other Projects</h2>
         <p className="text-muted text-sm max-w-xl">
           Additional builds — hackathon MVPs, CV experiments, and early learning projects.
         </p>
       </motion.div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
         {otherProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
       </div>
     </section>

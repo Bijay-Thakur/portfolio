@@ -22,7 +22,7 @@ const links = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 px-4 max-w-3xl mx-auto text-center">
+    <section id="contact" className="py-16 md:py-24 px-4 max-w-3xl mx-auto text-center">
       <SectionDivider label="Contact" />
 
       <motion.div
@@ -31,15 +31,15 @@ export default function Contact() {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.42, ease: "easeOut" }}
       >
-        <h2 className="font-serif text-4xl sm:text-5xl font-semibold text-snow mb-5">
+        <h2 className="font-serif text-3xl sm:text-5xl font-semibold text-snow mb-5">
           Let&apos;s Build Something Meaningful
         </h2>
-        <p className="text-muted leading-relaxed mb-14 max-w-lg mx-auto">
+        <p className="text-muted leading-relaxed mb-10 sm:mb-14 max-w-lg mx-auto">
           Open to internships, AI/ML roles, SWE opportunities, and interesting collaborations.
           Feel free to reach out — I respond to every message.
         </p>
 
-        <div className="grid sm:grid-cols-2 gap-4 mb-14">
+        <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 mb-10 sm:mb-14">
           {links.map((link, i) => (
             <motion.a
               key={link.label}
@@ -51,14 +51,14 @@ export default function Contact() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.32, delay: 0.08 + i * 0.06, ease: "easeOut" }}
               whileHover={{ y: -3, transition: { duration: 0.15 } }}
-              className="flex items-center gap-3 bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.12)] rounded-lg p-4 hover:border-[rgba(13,214,200,0.38)] hover:bg-[rgba(13,214,200,0.05)] transition-[border-color,background] group"
+              className="flex items-center gap-3 bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.12)] rounded-lg p-4 hover:border-[rgba(13,214,200,0.38)] hover:bg-[rgba(13,214,200,0.05)] transition-[border-color,background] group min-w-0"
             >
               <div className="w-9 h-9 rounded-full bg-[rgba(13,214,200,0.08)] border border-[rgba(13,214,200,0.2)] flex items-center justify-center text-teal/70 group-hover:text-teal transition-colors shrink-0">
                 {iconMap[link.icon]}
               </div>
-              <div className="text-left">
+              <div className="min-w-0 text-left">
                 <p className="text-sm font-medium text-snow group-hover:text-teal transition-colors">{link.label}</p>
-                <p className="text-xs text-muted/60">{link.desc}</p>
+                <p className="break-words text-xs text-muted/60">{link.desc}</p>
               </div>
             </motion.a>
           ))}
@@ -71,13 +71,13 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.4 }}
           whileHover={{ scale: 1.03 }}
-          className="inline-flex items-center gap-2 px-8 py-3 bg-teal text-ocean text-sm font-semibold rounded hover:bg-teal-light transition-colors"
+          className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-teal text-ocean text-sm font-semibold rounded hover:bg-teal-light transition-colors"
         >
           <Mail size={15} /> Send an Email
         </motion.a>
       </motion.div>
 
-      <div className="mt-20 pt-8 border-t border-[rgba(255,255,255,0.06)]">
+      <div className="mt-14 sm:mt-20 pt-8 border-t border-[rgba(255,255,255,0.06)]">
         <p className="text-xs text-muted/40">
           © {new Date().getFullYear()} Bijay Thakur · Built with Next.js, Tailwind CSS & Framer Motion
         </p>

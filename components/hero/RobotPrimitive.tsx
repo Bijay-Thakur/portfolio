@@ -1,8 +1,8 @@
 "use client";
 
 import { useFrame, useThree } from "@react-three/fiber";
-import { RoundedBox, Sparkles } from "@react-three/drei";
-import { useEffect, useRef } from "react";
+import { RoundedBox, Sparkles, Text } from "@react-three/drei";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 const clamp = (value: number, min: number, max: number) =>
@@ -18,8 +18,11 @@ export default function RobotPrimitive() {
   const visorRef = useRef<THREE.Mesh>(null);
   const leftHandRef = useRef<THREE.Mesh>(null);
   const rightHandRef = useRef<THREE.Mesh>(null);
-  const { pointer } = useThree();
+  const { pointer, size } = useThree();
   const windowPointer = useRef({ x: 0, y: 0 });
+  const [faceHovered, setFaceHovered] = useState(false);
+  const [chestHovered, setChestHovered] = useState(false);
+  const [antennaHovered, setAntennaHovered] = useState(false);
 
   useEffect(() => {
     const handlePointerMove = (event: PointerEvent) => {
@@ -28,9 +31,22 @@ export default function RobotPrimitive() {
         y: -(event.clientY / window.innerHeight) * 2 + 1,
       };
     };
+    const handleTouchMove = (event: TouchEvent) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+
+      windowPointer.current = {
+        x: (touch.clientX / window.innerWidth) * 2 - 1,
+        y: -(touch.clientY / window.innerHeight) * 2 + 1,
+      };
+    };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    return () => window.removeEventListener("pointermove", handlePointerMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
   }, []);
 
   useFrame(({ clock }) => {
@@ -41,6 +57,10 @@ export default function RobotPrimitive() {
         : pointer;
     const targetY = clamp(activePointer.x * 0.35, -0.35, 0.35);
     const targetX = clamp(-activePointer.y * 0.18, -0.18, 0.18);
+    const isMobile = size.width < 768;
+    const isTablet = size.width >= 768 && size.width < 1024;
+    const responsiveScale = isMobile ? 0.8 : isTablet ? 0.92 : 1.18;
+    const responsiveBaseY = isMobile ? -0.72 : isTablet ? -1.04 : ROBOT_BASE_Y;
 
     if (headRef.current) {
       headRef.current.rotation.y += (targetY - headRef.current.rotation.y) * 0.06;
@@ -49,9 +69,13 @@ export default function RobotPrimitive() {
     }
 
     if (bodyRef.current) {
+      bodyRef.current.scale.lerp(
+        new THREE.Vector3(responsiveScale, responsiveScale, responsiveScale),
+        0.08
+      );
       bodyRef.current.rotation.y += (targetY * 0.35 - bodyRef.current.rotation.y) * 0.045;
       bodyRef.current.rotation.x += (targetX * 0.25 - bodyRef.current.rotation.x) * 0.045;
-      bodyRef.current.position.y = ROBOT_BASE_Y + Math.sin(elapsed * 1.2) * 0.025;
+      bodyRef.current.position.y = responsiveBaseY + Math.sin(elapsed * 1.2) * 0.025;
     }
 
     if (leftArmRef.current) {
@@ -64,7 +88,9 @@ export default function RobotPrimitive() {
       rightArmRef.current.rotation.x = Math.sin(elapsed * 1.35 + 0.5) * 0.04;
     }
 
-    const winkClosed = Math.sin(elapsed * 1.15) > 0.965;
+    const winkClosed = faceHovered
+      ? Math.sin(elapsed * 10) > 0.62
+      : Math.sin(elapsed * 1.15) > 0.965;
     if (visorRef.current) {
       const targetScaleY = winkClosed ? 0.18 : 1;
       visorRef.current.scale.y += (targetScaleY - visorRef.current.scale.y) * 0.28;
@@ -90,12 +116,6 @@ export default function RobotPrimitive() {
         opacity={0.36}
       />
 
-      {/* soft base glow */}
-      <mesh position={[0, -0.68, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[1.35, 64]} />
-        <meshBasicMaterial color="#0dd6c8" transparent opacity={0.1} />
-      </mesh>
-
       {/* torso */}
       <RoundedBox args={[1.25, 1.25, 0.62]} radius={0.18} smoothness={6}>
         <meshStandardMaterial
@@ -109,13 +129,42 @@ export default function RobotPrimitive() {
       {/* chest plate */}
       <RoundedBox position={[0, 0.08, 0.34]} args={[0.76, 0.42, 0.04]} radius={0.08} smoothness={5}>
         <meshStandardMaterial
-          color="#05070c"
+          color={chestHovered ? "#062f36" : "#05070c"}
           metalness={0.4}
           roughness={0.2}
           emissive="#0dd6c8"
-          emissiveIntensity={0.28}
+          emissiveIntensity={chestHovered ? 1.65 : 0.28}
         />
       </RoundedBox>
+
+      {/* chest hover target */}
+      <mesh
+        position={[0, 0.08, 0.43]}
+        onPointerOver={(event) => {
+          event.stopPropagation();
+          setChestHovered(true);
+        }}
+        onPointerOut={() => setChestHovered(false)}
+      >
+        <boxGeometry args={[0.9, 0.55, 0.08]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+      </mesh>
+
+      {chestHovered && (
+        <Text
+          position={[0, 0.53, 0.48]}
+          fontSize={0.085}
+          maxWidth={1.35}
+          textAlign="center"
+          anchorX="center"
+          anchorY="middle"
+          color="#e4ffff"
+          outlineWidth={0.004}
+          outlineColor="#0dd6c8"
+        >
+          Hi, I am BithBot.{"\n"}Welcome to Bijay&apos;s portfolio.
+        </Text>
+      )}
 
       {/* chest core */}
       <mesh position={[0, 0.08, 0.38]}>
@@ -157,25 +206,65 @@ export default function RobotPrimitive() {
           />
         </RoundedBox>
 
+        {/* face hover target */}
+        <mesh
+          position={[0, 0.04, 0.48]}
+          onPointerOver={(event) => {
+            event.stopPropagation();
+            setFaceHovered(true);
+          }}
+          onPointerOut={() => setFaceHovered(false)}
+        >
+          <boxGeometry args={[0.92, 0.52, 0.08]} />
+          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+        </mesh>
+
         {/* visor scan line */}
         <mesh position={[0, 0.08, 0.425]}>
           <boxGeometry args={[0.54, 0.025, 0.012]} />
           <meshBasicMaterial color="#8ff7ee" toneMapped={false} />
         </mesh>
 
+        {faceHovered && (
+          <mesh position={[0, -0.16, 0.445]} rotation={[0, 0, Math.PI]}>
+            <torusGeometry args={[0.18, 0.012, 8, 32, Math.PI]} />
+            <meshBasicMaterial color="#eaffff" toneMapped={false} />
+          </mesh>
+        )}
+
         {/* antenna */}
         <mesh position={[0, 0.56, 0]} rotation={[0, 0, 0]}>
           <cylinderGeometry args={[0.018, 0.018, 0.32, 16]} />
           <meshStandardMaterial color="#0dd6c8" emissive="#0dd6c8" emissiveIntensity={0.45} />
         </mesh>
-        <mesh position={[0, 0.76, 0]}>
+        <mesh
+          position={[0, 0.76, 0]}
+          onPointerOver={(event) => {
+            event.stopPropagation();
+            setAntennaHovered(true);
+          }}
+          onPointerOut={() => setAntennaHovered(false)}
+        >
           <sphereGeometry args={[0.065, 24, 24]} />
           <meshStandardMaterial
-            color="#8ff7ee"
-            emissive="#0dd6c8"
-            emissiveIntensity={1.3}
+            color={antennaHovered ? "#ffe66d" : "#8ff7ee"}
+            emissive={antennaHovered ? "#ffd000" : "#0dd6c8"}
+            emissiveIntensity={antennaHovered ? 2.4 : 1.3}
             toneMapped={false}
           />
+        </mesh>
+
+        {/* larger antenna hover target */}
+        <mesh
+          position={[0, 0.76, 0]}
+          onPointerOver={(event) => {
+            event.stopPropagation();
+            setAntennaHovered(true);
+          }}
+          onPointerOut={() => setAntennaHovered(false)}
+        >
+          <sphereGeometry args={[0.16, 16, 16]} />
+          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
         </mesh>
       </group>
 

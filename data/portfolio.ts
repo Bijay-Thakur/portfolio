@@ -266,7 +266,7 @@ export const experiences: Experience[] = [
   {
     role: "Academic Tutor",
     org: "LaGuardia Community College",
-    dates: "2023 – 2024",
+    dates: "February 2024 – June 2024",
     bullets: [
       "Tutored students in C++, Object-Oriented Programming, and core CS fundamentals.",
       "Simplified complex OOP concepts with hands-on coding examples and walkthroughs.",

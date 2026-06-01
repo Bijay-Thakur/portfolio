@@ -44,12 +44,6 @@ body {
 
 * { box-sizing: border-box; }
 
-/* GPU-accelerate every animated section so transforms don't cause repaints */
-section {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-}
-
 /* Profile image ripple rings */
 @keyframes ripple-wave {
   0%   { transform: scale(1);    opacity: 0.45; }
@@ -89,7 +83,7 @@ section {
 
 .typewriter-text {
   display: inline-block;
-  max-width: 23ch;
+  max-width: min(27ch, calc(100vw - 3rem));
   overflow: hidden;
   white-space: nowrap;
   border-right: 2px solid #8ff7ee;
@@ -98,7 +92,7 @@ section {
 
 @keyframes typing {
   from { width: 0; }
-  to { width: 23ch; }
+  to { width: min(27ch, calc(100vw - 3rem)); }
 }
 
 @keyframes caret-blink {

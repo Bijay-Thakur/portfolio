@@ -7,10 +7,10 @@ import { siteConfig } from "@/data/portfolio";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-4 max-w-6xl mx-auto">
+    <section id="about" className="py-16 md:py-24 px-4 max-w-6xl mx-auto">
       <SectionDivider label="About" />
 
-      <div className="grid lg:grid-cols-2 gap-8 items-center">
+      <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
 
         {/* ── Profile image + wave rings ───────────────── */}
         <motion.div
@@ -21,7 +21,7 @@ export default function About() {
           className="flex justify-center lg:justify-start"
         >
           {/* Wrapper — all rings share this centre */}
-          <div className="relative flex items-center justify-center" style={{ width: 280, height: 280 }}>
+          <div className="relative flex h-60 w-60 items-center justify-center sm:h-[280px] sm:w-[280px]">
 
             {/* Wave ring 1 — innermost, fastest */}
             <div
@@ -48,7 +48,7 @@ export default function About() {
             {/* ── Circular image ── */}
             <div
               className="relative rounded-full overflow-hidden border-2 border-[rgba(13,214,200,0.5)] shadow-[0_0_48px_rgba(13,214,200,0.15)]"
-              style={{ width: 220, height: 220, zIndex: 2 }}
+              style={{ width: "78.5%", height: "78.5%", zIndex: 2 }}
             >
               <Image
                 src="/images/profileImage.png"
@@ -79,7 +79,7 @@ export default function About() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
         >
-          <h2 className="font-serif text-4xl font-semibold text-snow mb-6">About Me</h2>
+          <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-5 sm:mb-6">About Me</h2>
           <p className="text-muted leading-relaxed mb-8 text-[15px]">{siteConfig.about}</p>
 
           <div className="flex flex-wrap gap-2">

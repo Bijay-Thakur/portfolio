@@ -7,7 +7,7 @@ import { experiences } from "@/data/portfolio";
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 px-4 max-w-4xl mx-auto">
+    <section id="experience" className="py-16 md:py-24 px-4 max-w-4xl mx-auto">
       <SectionDivider label="Experience" />
 
       <motion.h2
@@ -15,15 +15,15 @@ export default function Experience() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="font-serif text-4xl font-semibold text-snow mb-14"
+        className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-10 sm:mb-14"
       >
         Experience
       </motion.h2>
 
       <div className="relative">
-        <div className="absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-[rgba(13,214,200,0.5)] via-[rgba(13,214,200,0.12)] to-transparent" />
+        <div className="absolute left-3 sm:left-5 top-0 bottom-0 w-px bg-gradient-to-b from-[rgba(13,214,200,0.5)] via-[rgba(13,214,200,0.12)] to-transparent" />
 
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
           {experiences.map((exp, i) => (
             <motion.div
               key={`${exp.role}-${exp.org}`}
@@ -31,11 +31,11 @@ export default function Experience() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.38, delay: i * 0.07, ease: "easeOut" }}
-              className="relative pl-14"
+              className="relative pl-8 sm:pl-14"
             >
-              <div className="absolute left-[14px] top-2 w-3 h-3 rounded-full border-2 border-teal bg-ocean shadow-[0_0_8px_rgba(13,214,200,0.5)]" />
+              <div className="absolute left-[6px] sm:left-[14px] top-2 w-3 h-3 rounded-full border-2 border-teal bg-ocean shadow-[0_0_8px_rgba(13,214,200,0.5)]" />
 
-              <div className="bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-5 hover:border-[rgba(13,214,200,0.28)] transition-colors">
+              <div className="bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-4 sm:p-5 hover:border-[rgba(13,214,200,0.28)] transition-colors">
                 <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
                   <div>
                     <h3 className="font-semibold text-snow text-base">{exp.role}</h3>

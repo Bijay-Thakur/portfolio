@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { ContactShadows, Float } from "@react-three/drei";
+import { Float } from "@react-three/drei";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
@@ -29,17 +29,9 @@ function Scene() {
       <pointLight position={[2.8, 1.5, -2.6]} intensity={1.7} color="#45beff" />
       <CursorParticles />
 
-      <Float speed={1.15} rotationIntensity={0.24} floatIntensity={0.12}>
+      <Float speed={1.15} rotationIntensity={0.18} floatIntensity={0.1}>
         <RobotPrimitive />
       </Float>
-
-      <ContactShadows
-        position={[0, -40, 0]}
-        opacity={0.28}
-        scale={5}
-        blur={2.8}
-        far={0.0}
-      />
     </>
   );
 }
@@ -48,7 +40,12 @@ function CursorParticles() {
   const pointsRef = useRef<THREE.Points>(null);
   const { pointer } = useThree();
   const windowPointer = useRef({ x: 0, y: 0 });
-  const count = typeof window !== "undefined" && window.innerWidth < 768 ? 170 : 420;
+  const count =
+    typeof window !== "undefined" && window.innerWidth < 768
+      ? 120
+      : typeof window !== "undefined" && window.innerWidth < 1024
+        ? 220
+        : 420;
 
   useEffect(() => {
     const handlePointerMove = (event: PointerEvent) => {
@@ -57,9 +54,22 @@ function CursorParticles() {
         y: -(event.clientY / window.innerHeight) * 2 + 1,
       };
     };
+    const handleTouchMove = (event: TouchEvent) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+
+      windowPointer.current = {
+        x: (touch.clientX / window.innerWidth) * 2 - 1,
+        y: -(touch.clientY / window.innerHeight) * 2 + 1,
+      };
+    };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    return () => window.removeEventListener("pointermove", handlePointerMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
   }, []);
   const origins = useMemo(() => {
     const data = new Float32Array(count * 3);
@@ -166,7 +176,7 @@ export default function InteractiveRobotHero() {
   }
 
   return (
-    <div className="relative h-full min-h-screen overflow-visible">
+    <div className="relative h-full min-h-[100svh] overflow-visible">
       {/* full-hero glow behind robot */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(13,214,200,0.18),transparent_30%),radial-gradient(circle_at_54%_40%,rgba(69,190,255,0.12),transparent_42%)]" />
       <div
@@ -174,16 +184,16 @@ export default function InteractiveRobotHero() {
         style={{
           backgroundImage:
             "linear-gradient(rgba(13,214,200,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(13,214,200,0.8) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
+          backgroundSize: "clamp(42px, 8vw, 64px) clamp(42px, 8vw, 64px)",
         }}
       />
 
       <Canvas
         aria-hidden="true"
-        className="!absolute inset-0"
-        camera={{ position: [0, 0.52, 6.1], fov: 36 }}
-        dpr={[1, 1.6]}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        className="!absolute inset-0 touch-pan-y"
+        camera={{ position: [0, 0.45, 6.15], fov: 36 }}
+        dpr={[1, 1.4]}
+        gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
         onCreated={({ gl }) => {
           gl.setClearColor(0x000000, 0);
         }}

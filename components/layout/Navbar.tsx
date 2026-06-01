@@ -40,7 +40,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -54,7 +54,7 @@ export default function Navbar() {
         </nav>
 
         {/* Desktop icons */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
             className="text-white/65 hover:text-[#8ff7ee] transition-colors">
             <GithubIcon width={17} height={17} />
@@ -70,7 +70,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile toggle */}
-        <button className="md:hidden text-white/80 hover:text-[#8ff7ee] transition-colors"
+        <button className="lg:hidden text-white/80 hover:text-[#8ff7ee] transition-colors"
           onClick={() => setMenuOpen(v => !v)} aria-label="Toggle menu">
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -78,7 +78,7 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       {menuOpen && (
-        <div className="md:hidden bg-black/95 backdrop-blur-md border-b border-[#0dd6c8]/15 px-4 py-6 flex flex-col gap-4">
+        <div className="lg:hidden bg-black/95 backdrop-blur-md border-b border-[#0dd6c8]/15 px-4 py-6 flex max-h-[70svh] flex-col gap-4 overflow-y-auto">
           {navLinks.map((link) => (
             <a key={link.href} href={link.href}
               onClick={(e) => handleNav(e, link.href)}
