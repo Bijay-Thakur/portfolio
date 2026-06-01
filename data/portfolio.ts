@@ -142,7 +142,7 @@ export const featuredProjects: Project[] = [
     tech: ["Python", "PyTorch", "Hugging Face", "Transformers", "Seq2SeqTrainer", "CUDA", "Google Colab"],
     highlight:
       "BLEU score improved from 46.07 → 58.37 across scaling experiments; larger in-domain training sets consistently improved translation quality.",
-    repoUrl: "https://github.com/Bijay-Thakur",
+    repoUrl: "https://github.com/Bijay-Thakur/marianmt-en-fr-domain-adaptation",
     isFeatured: true,
   },
   {
@@ -283,8 +283,8 @@ export const education: Education[] = [
     school: "Queens College, CUNY",
     degree: "B.S. Computer Science",
     period: "Spring 2025 – Fall 2026",
-    gpa: "3.615",
-    honor: "Dean's List — 2 semesters",
+    gpa: "3.642",
+    honor: "3x Dean's List",
     note: "Graduating Dec 2026 · Focus: AI/ML, Systems, Databases, Algorithms",
   },
   {
@@ -292,7 +292,7 @@ export const education: Education[] = [
     degree: "A.S. Computer Science",
     period: "Fall 2023 – Fall 2024",
     gpa: "3.802",
-    honor: "Dean's List — all 3 semesters",
+    honor: "3x Dean's List",
     note: "Transfer to Queens College",
   },
   {
@@ -300,7 +300,7 @@ export const education: Education[] = [
     degree: "Early University Coursework",
     period: "Fall 2022 – Spring 2023",
     gpa: "4.00",
-    honor: "President's List — both semesters",
+    honor: "2x President's List",
     note: "Completed foundational CS coursework",
   },
 ];

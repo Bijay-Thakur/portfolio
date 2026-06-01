@@ -14,7 +14,7 @@ export default function Experience() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         className="font-serif text-4xl font-semibold text-snow mb-14"
       >
         Experience
@@ -30,7 +30,7 @@ export default function Experience() {
               initial={{ opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.55, delay: i * 0.1, ease: "easeOut" }}
+              transition={{ duration: 0.38, delay: i * 0.07, ease: "easeOut" }}
               className="relative pl-14"
             >
               <div className="absolute left-[14px] top-2 w-3 h-3 rounded-full border-2 border-teal bg-ocean shadow-[0_0_8px_rgba(13,214,200,0.5)]" />

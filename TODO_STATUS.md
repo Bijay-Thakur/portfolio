@@ -43,3 +43,21 @@
 - Profile image: placeholder (User icon). Replace `components/sections/About.tsx` profile section with real image when available.
 - Favicon: uses existing favicon.ico. Can be updated to match new brand.
 - The old `/about`, `/experience`, `/contact`, `/projects` routes now redirect to the homepage anchors.
+
+## Hero Update Checklist
+- [x] Full-screen dark cinematic hero implemented
+- [x] Hero text updated
+- [x] View Projects CTA works
+- [x] Resume CTA works
+- [x] GitHub/LinkedIn/Email links present
+- [x] 3D robot or primitive fallback implemented
+- [x] Robot reacts smoothly to cursor
+- [x] Idle animation implemented
+- [x] Mobile fallback/responsive layout works
+- [x] Canvas does not contain critical text
+- [x] No heavy assets added
+- [x] npm run build passes
+
+## Hero Update Notes
+- No `.glb` model exists in `/public/models`, so the hero uses the primitive Three.js robot fallback.
+- WebGL failure fallback is implemented with a CSS-only AI card.

@@ -17,7 +17,7 @@ export default function About() {
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
           className="flex justify-center lg:justify-start"
         >
           {/* Wrapper — all rings share this centre */}
@@ -77,7 +77,7 @@ export default function About() {
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
         >
           <h2 className="font-serif text-4xl font-semibold text-snow mb-6">About Me</h2>
           <p className="text-muted leading-relaxed mb-8 text-[15px]">{siteConfig.about}</p>

@@ -29,7 +29,7 @@ export default function Contact() {
         initial={{ opacity: 0, y: 26 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.65, ease: "easeOut" }}
+        transition={{ duration: 0.42, ease: "easeOut" }}
       >
         <h2 className="font-serif text-4xl sm:text-5xl font-semibold text-snow mb-5">
           Let&apos;s Build Something Meaningful
@@ -49,7 +49,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, delay: 0.1 + i * 0.08, ease: "easeOut" }}
+              transition={{ duration: 0.32, delay: 0.08 + i * 0.06, ease: "easeOut" }}
               whileHover={{ y: -3, transition: { duration: 0.15 } }}
               className="flex items-center gap-3 bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.12)] rounded-lg p-4 hover:border-[rgba(13,214,200,0.38)] hover:bg-[rgba(13,214,200,0.05)] transition-[border-color,background] group"
             >

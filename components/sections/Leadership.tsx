@@ -13,7 +13,7 @@ export default function Leadership() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         className="font-serif text-4xl font-semibold text-snow mb-14"
       >
         Leadership & Involvement
@@ -26,7 +26,7 @@ export default function Leadership() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+            transition={{ duration: 0.38, delay: i * 0.07, ease: "easeOut" }}
             className="bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-5 hover:border-[rgba(13,214,200,0.28)] transition-colors"
           >
             <h3 className="font-semibold text-snow text-base">{item.title}</h3>

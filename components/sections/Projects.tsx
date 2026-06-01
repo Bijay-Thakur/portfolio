@@ -12,7 +12,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.08 }}
-      transition={{ duration: 0.5, delay: index * 0.07, ease: "easeOut" }}
+      transition={{ duration: 0.38, delay: index * 0.05, ease: "easeOut" }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="group flex flex-col h-full bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-6 hover:border-[rgba(13,214,200,0.35)] hover:shadow-[0_4px_30px_rgba(13,214,200,0.07)] transition-[border-color,box-shadow] duration-300"
     >
@@ -66,7 +66,7 @@ const sectionAnim = {
   initial: { opacity: 0, y: 22 },
   whileInView: { opacity: 1, y: 0 } as { opacity: number; y: number },
   viewport: { once: true as const, amount: 0.1 as const },
-  transition: { duration: 0.6, ease: "easeOut" as const },
+  transition: { duration: 0.4, ease: "easeOut" as const },
 };
 
 export default function Projects() {

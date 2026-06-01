@@ -12,9 +12,9 @@ const ParticleBackground = dynamic(
 );
 
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, delay, ease: "easeOut" as const },
+  transition: { duration: 0.55, delay, ease: "easeOut" as const },
 });
 
 export default function Hero() {
@@ -129,8 +129,8 @@ export default function Hero() {
           className="flex items-center justify-center gap-4 text-xs text-muted/70"
         >
           {/* Education */}
-          <span className="flex items-center gap-1.5">
-            <GraduationCap size={14} className="text-teal/60" />
+          <span className="flex items-center gap-1.5" style={{ color: "white" }}>
+            <GraduationCap size={14} className="text-teal/60" style={{ color: "white" }} />
             Queens College
           </span>
 
@@ -138,8 +138,8 @@ export default function Hero() {
           <span className="w-px h-4 bg-[rgba(13,214,200,0.25)] shrink-0" />
 
           {/* Location */}
-          <span className="flex items-center gap-1.5">
-            <MapPin size={13} className="text-teal/60" />
+          <span className="flex items-center gap-1.5" style={{ color: "white" }}>
+            <MapPin size={13} className="text-teal/60" style={{ color: "white" }} />
             Queens, New York
           </span>
         </motion.div>
