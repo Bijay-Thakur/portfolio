@@ -96,9 +96,22 @@ body {
   50% { border-color: transparent; }
 }
 
+@media (max-width: 640px) {
+  .typewriter-text {
+    display: inline;
+    max-width: none;
+    overflow: visible;
+    white-space: normal;
+    border-right: 0;
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .typewriter-text {
     max-width: none;
+    overflow: visible;
+    white-space: normal;
     border-right: 0;
     animation: none;
   }

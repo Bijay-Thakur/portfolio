@@ -55,7 +55,7 @@ export default function HeroSection() {
 
         {/* Right headline + actions */}
         <div className="pointer-events-auto mb-5 max-w-md rounded-3xl bg-[#020a12]/45 p-4 text-center backdrop-blur-[2px] sm:mb-8 lg:mb-0 lg:ml-auto lg:bg-transparent lg:p-0 lg:text-center lg:backdrop-blur-0">
-          <h1 className="hero-reveal hero-reveal-delay-1 font-serif text-xl font-semibold uppercase leading-[1.1] tracking-tight text-white min-[390px]:text-2xl sm:text-3xl lg:text-4xl">
+          <h1 className="hero-reveal hero-reveal-delay-1 font-serif text-lg font-semibold uppercase leading-[1.12] tracking-tight text-white min-[390px]:text-xl sm:text-3xl lg:text-4xl">
             <span className="typewriter-text">Building Intelligent System</span>
           </h1>
 
