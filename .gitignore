@@ -23,6 +23,15 @@
 # misc
 .DS_Store
 *.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+id_rsa*
+credentials*.json
+service-account*.json
+firebase-adminsdk*.json
 
 # debug
 npm-debug.log*
@@ -30,8 +39,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# local env / secrets
+.env
 .env*
+!.env.example
+!.env.sample
+*.env.local
 
 # vercel
 .vercel
@@ -39,7 +52,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
- data/
- TODO_STATUS.md
- AGENTS.md
- updated_portfolio_repo_research_and_cursor_prompt.md
+
+# local notes / generated research
+TODO_STATUS.md
+updated_portfolio_repo_research_and_cursor_prompt.md

@@ -42,10 +42,10 @@ function CursorParticles() {
   const windowPointer = useRef({ x: 0, y: 0 });
   const count =
     typeof window !== "undefined" && window.innerWidth < 768
-      ? 120
+      ? 90
       : typeof window !== "undefined" && window.innerWidth < 1024
-        ? 220
-        : 420;
+        ? 160
+        : 320;
 
   useEffect(() => {
     const handlePointerMove = (event: PointerEvent) => {

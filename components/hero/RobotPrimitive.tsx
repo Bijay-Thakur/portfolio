@@ -108,7 +108,7 @@ export default function RobotPrimitive() {
   return (
     <group ref={bodyRef} position={[0, ROBOT_BASE_Y, 0]} scale={1.18}>
       <Sparkles
-        count={54}
+        count={36}
         scale={[4.4, 3.2, 2.2]}
         size={1}
         speed={0.18}

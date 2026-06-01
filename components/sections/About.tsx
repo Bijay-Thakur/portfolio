@@ -54,7 +54,8 @@ export default function About() {
                   src="/images/profileImage.png"
                   alt="Bijay Thakur"
                   className="h-full w-full object-cover object-top"
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
