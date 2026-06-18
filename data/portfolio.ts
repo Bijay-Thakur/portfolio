@@ -84,15 +84,16 @@ export const navLinks: NavLink[] = [
 export const featuredProjects: Project[] = [
   {
     slug: "rag-sec-10k",
-    title: "RAG SEC 10-K",
+    title: "SEC Insight AI — Production Financial QA System",
     category: "RAG Systems / Retrieval Evaluation",
     summary:
       "Source-grounded RAG over Apple's 2025 10-K. Manual Python pipeline plus LlamaIndex v2 with hybrid retrieval, BM25 + semantic RRF, cross-encoder reranking, citation-backed answers, and a 50-question gold evaluation set.",
     tech: ["Python", "RAG", "LlamaIndex", "ChromaDB", "OpenAI", "BM25", "RAGAS", "Streamlit"],
     highlight:
       "Hybrid Recall@5: 0.86 · RAGAS Faithfulness: 0.99 · ~3s query latency (README evaluation set).",
-    honestNote: "Single filing (Apple 2025 10-K). Not deployed for real analysts.",
+    honestNote: "Live demo on Apple 2025 10-K; not a production analyst platform.",
     repoUrl: "https://github.com/Bijay-Thakur/rag-sec-10k",
+    demoUrl: "https://rag-sec-10k-alpha.vercel.app",
     isFeatured: true,
   },
   {
@@ -187,6 +188,7 @@ export const otherProjects: Project[] = [
     honestNote: "Mock data only. No production AI, live POS, or real payments.",
     repoUrl:
       "https://github.com/Bijay-Thakur/StoreSense---AI-Profit-Leak-Assistant-for-Small-Stores",
+    demoUrl: "https://store-sense-ai-profit-leak-assistan.vercel.app",
     isPrototype: true,
   },
   {
