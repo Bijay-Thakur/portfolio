@@ -78,42 +78,102 @@ body {
   .hero-reveal-delay-4 { animation-delay: 320ms; }
 }
 
-.typewriter-text {
-  display: inline-block;
-  max-width: min(27ch, calc(100vw - 3rem));
-  overflow: hidden;
+/* ── Typewriter headline ───────────────────────────────────────────────
+   Reveal is driven by clip-path (a percentage of the element's own width),
+   NOT by a `ch` width cap. `ch` is the width of "0", which is far narrower
+   than uppercase serif glyphs, so the old 27ch cap clipped the headline
+   ("…SYST") on large screens. Percentages are font-metric independent. */
+.type-line {
+  display: block;
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+}
+.type-line + .type-line { margin-top: 0.06em; }
+
+.type-ink {
+  display: block;
   white-space: nowrap;
-  border-right: 2px solid #8ff7ee;
-  animation: typing 2.2s steps(27, end) both, caret-blink 800ms step-end infinite;
 }
 
-@keyframes typing {
-  from { width: 0; }
-  to { width: min(27ch, calc(100vw - 3rem)); }
-}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes type-reveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
 
-@keyframes caret-blink {
-  50% { border-color: transparent; }
-}
+  @keyframes type-caret-travel {
+    from { left: 0; }
+    to   { left: 100%; }
+  }
 
-@media (max-width: 640px) {
-  .typewriter-text {
-    display: inline;
-    max-width: none;
-    overflow: visible;
-    white-space: normal;
-    border-right: 0;
-    animation: none;
+  .type-line-1 .type-ink {
+    animation: type-reveal 620ms steps(8, end) 220ms both;
+  }
+
+  .type-line-2 .type-ink {
+    animation: type-reveal 1150ms steps(19, end) 900ms both;
+  }
+
+  .type-line-2::after {
+    content: "";
+    position: absolute;
+    top: 0.1em;
+    bottom: 0.14em;
+    left: 0;
+    width: 2px;
+    margin-left: -1px;
+    background: #8ff7ee;
+    animation:
+      type-caret-travel 1150ms steps(19, end) 900ms both,
+      caret-blink 820ms step-end 900ms infinite;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .typewriter-text {
-    max-width: none;
-    overflow: visible;
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+/* Phones: no typing, just wrap the headline normally. */
+@media (max-width: 639px) {
+  .type-line { width: auto; }
+  .type-ink {
     white-space: normal;
-    border-right: 0;
     animation: none;
+    clip-path: none;
+  }
+  .type-line-2::after { display: none; }
+}
+
+/* ── Site-map bubbles ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes node-halo {
+    0%, 100% { transform: scale(1);    opacity: 0.5; }
+    50%      { transform: scale(1.28); opacity: 0; }
+  }
+  .node-halo { animation: node-halo 3.2s ease-out infinite; }
+}
+
+/* ── Ambient aurora drift behind the hero ──────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes aurora-drift {
+    0%   { transform: translate3d(-3%, -2%, 0) scale(1.05); }
+    50%  { transform: translate3d(4%, 3%, 0)  scale(1.16); }
+    100% { transform: translate3d(-3%, -2%, 0) scale(1.05); }
+  }
+  .aurora { animation: aurora-drift 22s ease-in-out infinite; }
+  .aurora-slow { animation-duration: 31s; animation-direction: reverse; }
+}
+
+/* Shimmer used on section eyebrows and the featured project rail */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes accent-sweep {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  .accent-sweep {
+    background-size: 200% 100%;
+    animation: accent-sweep 5.5s linear infinite;
   }
 }
 

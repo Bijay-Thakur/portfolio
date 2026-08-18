@@ -20,7 +20,7 @@ function hasWebGL() {
   }
 }
 
-function Scene() {
+function Scene({ onOpenSiteMap }: { onOpenSiteMap?: () => void }) {
   return (
     <>
       <ambientLight intensity={0.78} />
@@ -30,7 +30,7 @@ function Scene() {
       <CursorParticles />
 
       <Float speed={1.15} rotationIntensity={0.18} floatIntensity={0.1}>
-        <RobotPrimitive />
+        <RobotPrimitive onOpenSiteMap={onOpenSiteMap} />
       </Float>
     </>
   );
@@ -163,7 +163,11 @@ function CursorParticles() {
   );
 }
 
-export default function InteractiveRobotHero() {
+export default function InteractiveRobotHero({
+  onOpenSiteMap,
+}: {
+  onOpenSiteMap?: () => void;
+}) {
   const [webglReady, setWebglReady] = useState(false);
   const [webglFailed, setWebglFailed] = useState(false);
 
@@ -200,15 +204,10 @@ export default function InteractiveRobotHero() {
         onError={() => setWebglFailed(true)}
       >
         <Suspense fallback={null}>
-          <Scene />
+          <Scene onOpenSiteMap={onOpenSiteMap} />
         </Suspense>
       </Canvas>
 
-      <div className="pointer-events-none absolute bottom-7 right-7 z-10 hidden text-[#8ff7ee]/75 sm:block">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[#0dd6c8]/25 bg-black/25">
-          ↓
-        </div>
-      </div>
     </div>
   );
 }

@@ -54,16 +54,26 @@ export type ContactLink = {
 
 // ─── Site Config ──────────────────────────────────────────────────────────────
 
+// Public site config. Values can be overridden per-environment via .env.local
+// (see .env.example); the literals below are the working fallbacks, so a build
+// with no env vars set still produces a correct site.
+//
+// NOTE: NEXT_PUBLIC_* is inlined into the browser bundle at build time. These
+// are public config, not secrets. Each var must be referenced as a full static
+// expression for Next.js to inline it — do not rewrite these as process.env[k].
+
 export const siteConfig = {
   initials: "B.T.",
   name: "Bijay Thakur",
   title: "AI Engineer · GenAI Systems Builder · Systems Thinker",
   tagline:
     "Building research-driven AI systems, RAG pipelines, and practical ML products with real-world utility.",
-  email: "starbijay143@gmail.com",
-  github: "https://github.com/Bijay-Thakur",
-  linkedin: "https://linkedin.com/in/bijay-thakur-6b7793258/",
-  resume: "/resumes/AI_ENGINEER_RESUME.pdf",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "starbijay143@gmail.com",
+  github: process.env.NEXT_PUBLIC_GITHUB_URL || "https://github.com/Bijay-Thakur",
+  linkedin:
+    process.env.NEXT_PUBLIC_LINKEDIN_URL ||
+    "https://linkedin.com/in/bijay-thakur-6b7793258/",
+  resume: process.env.NEXT_PUBLIC_RESUME_URL || "/resumes/AI_ENGINEER_RESUME.pdf",
   about:
     "I'm a Computer Science student at Queens College, CUNY, focused on AI/ML engineering, GenAI systems, RAG, applied ML, and production-minded software development. I enjoy building systems that are honest, evaluated, and actually useful — not just impressive in a demo.",
   focusTags: ["RAG", "LLM Apps", "Applied ML", "Full-Stack AI", "Evaluation", "Product Thinking"],
@@ -94,6 +104,20 @@ export const featuredProjects: Project[] = [
     honestNote: "Live demo on Apple 2025 10-K; not a production analyst platform.",
     repoUrl: "https://github.com/Bijay-Thakur/rag-sec-10k",
     demoUrl: "https://rag-sec-10k-alpha.vercel.app",
+    isFeatured: true,
+  },
+  {
+    slug: "rivalscope-ai",
+    title: "RivalScope AI — Agentic Competitive Intelligence",
+    category: "Agentic Systems / Competitive Intelligence",
+    summary:
+      "Agentic competitive-intelligence platform that runs live competitor research and generates cited GTM reports. Next.js 15 + LangGraph/LangChain with Tavily search, LangSmith tracing, and SSE streaming for real-time run progress.",
+    tech: ["Next.js 15", "LangGraph", "LangChain", "Tavily", "LangSmith", "Pydantic", "SSE", "TypeScript"],
+    highlight:
+      "Evaluation-driven grounding layer — Pydantic structured outputs, citation checks, LLM-as-judge evals, and cost/context guards: 88.9% comparison grounding on the latest real-mode benchmark.",
+    honestNote:
+      "Benchmark is a self-run real-mode eval, not an industry-standard leaderboard.",
+    repoUrl: "https://github.com/Bijay-Thakur/RivalScope-AI",
     isFeatured: true,
   },
   {
@@ -232,17 +256,19 @@ export const otherProjects: Project[] = [
 // ─── Experience ───────────────────────────────────────────────────────────────
 
 export const experiences: Experience[] = [
-  {
-    role: "AI Agent Builder Intern",
-    org: "NeuralSeek",
-    dates: "April 2026 – May 2026",
-    bullets: [
-      "Built custom AI agents using LangChain, RAG, and tool-use patterns.",
-      "Integrated vector databases and external APIs for real-time agent actions.",
-      "Evaluated and iterated on agent performance, accuracy, and safety.",
-    ],
-    tags: ["LangChain", "RAG", "Vector DB", "AI Agents", "Python"],
-  },
+  // ─── TEMPORARILY HIDDEN (personal reason) — do not delete ──────────────────
+  // {
+  //   role: "AI Agent Builder Intern",
+  //   org: "NeuralSeek",
+  //   dates: "April 2026 – May 2026",
+  //   bullets: [
+  //     "Built custom AI agents using LangChain, RAG, and tool-use patterns.",
+  //     "Integrated vector databases and external APIs for real-time agent actions.",
+  //     "Evaluated and iterated on agent performance, accuracy, and safety.",
+  //   ],
+  //   tags: ["LangChain", "RAG", "Vector DB", "AI Agents", "Python"],
+  // },
+  // ──────────────────────────────────────────────────────────────────────────
   {
     role: "Web Development Intern",
     org: "WebX Nepal",
@@ -367,13 +393,12 @@ export const skillGroups: SkillGroup[] = [
 
 // ─── Contact Links ────────────────────────────────────────────────────────────
 
+// Derived from siteConfig so there is exactly one source of truth per link —
+// and so an env override reaches every place the value is rendered.
 export const contactLinks: ContactLink[] = [
-  { label: "GitHub", href: "https://github.com/Bijay-Thakur", icon: "Github" },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/bijay-thakur-6b7793258/",
-    icon: "Linkedin",
-  },
-  { label: "Email", href: "mailto:starbijay143@gmail.com", icon: "Mail" },
-  { label: "Resume", href: "/resumes/AI_ML_Engineer_resume.pdf", icon: "FileText" },
+  { label: "GitHub", href: siteConfig.github, icon: "Github" },
+  { label: "LinkedIn", href: siteConfig.linkedin, icon: "Linkedin" },
+  { label: "Email", href: `mailto:${siteConfig.email}`, icon: "Mail" },
+  // Same PDF as the navbar/hero buttons (the NeuralSeek-free one).
+  { label: "Resume", href: siteConfig.resume, icon: "FileText" },
 ];

@@ -53,6 +53,22 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local notes / generated research
+# local notes / generated research (untracked — never publish working notes)
 TODO_STATUS.md
 updated_portfolio_repo_research_and_cursor_prompt.md
+data/portfolio_repo_research_and_cursor_brief.md
+
+# logs
+*.log
+debug.log
+
+# python virtualenv
+.venv/
+venv/
+__pycache__/
+
+# editor / OS cruft
+.idea/
+.vscode/
+Thumbs.db
+desktop.ini

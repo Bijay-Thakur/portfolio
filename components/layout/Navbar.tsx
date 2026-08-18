@@ -8,11 +8,35 @@ import { siteConfig, navLinks } from "@/data/portfolio";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState<string>("");
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  // Highlight the section currently under the navbar.
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => document.querySelector(link.href))
+      .filter((el): el is Element => Boolean(el));
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target.id) setActiveHref(`#${visible.target.id}`);
+      },
+      { rootMargin: "-25% 0px -55% 0px", threshold: [0.05, 0.25, 0.5] }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -29,7 +53,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 h-16 flex items-center justify-between">
         {/* Logo */}
         <a
           href="#hero"
@@ -41,16 +65,27 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNav(e, link.href)}
-              className="text-sm text-white/85 hover:text-[#8ff7ee] transition-colors tracking-wide"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeHref === link.href;
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNav(e, link.href)}
+                aria-current={isActive ? "true" : undefined}
+                className={`group relative text-sm tracking-wide transition-colors ${
+                  isActive ? "text-[#8ff7ee]" : "text-white/85 hover:text-[#8ff7ee]"
+                }`}
+              >
+                {link.label}
+                <span
+                  className={`absolute -bottom-1.5 left-0 h-px bg-gradient-to-r from-[#0dd6c8] to-[#8ff7ee] transition-all duration-300 ${
+                    isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-70"
+                  }`}
+                />
+              </a>
+            );
+          })}
         </nav>
 
         {/* Desktop icons */}
@@ -82,7 +117,12 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <a key={link.href} href={link.href}
               onClick={(e) => handleNav(e, link.href)}
-              className="text-base text-white/85 hover:text-[#8ff7ee] transition-colors py-1">
+              className={`flex items-center gap-2 text-base transition-colors py-1 ${
+                activeHref === link.href ? "text-[#8ff7ee]" : "text-white/85 hover:text-[#8ff7ee]"
+              }`}>
+              <span className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                activeHref === link.href ? "bg-[#0dd6c8]" : "bg-white/20"
+              }`} />
               {link.label}
             </a>
           ))}

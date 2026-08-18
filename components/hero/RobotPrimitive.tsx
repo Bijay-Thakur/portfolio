@@ -2,7 +2,7 @@
 
 import { useFrame, useThree } from "@react-three/fiber";
 import { RoundedBox, Sparkles, Text } from "@react-three/drei";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 const clamp = (value: number, min: number, max: number) =>
@@ -10,8 +10,34 @@ const clamp = (value: number, min: number, max: number) =>
 
 const ROBOT_BASE_Y = -1;
 
-export default function RobotPrimitive() {
+/* ── Clustered web on the chest screen ──────────────────────────────────────
+   A hub plus a six-node ring, small enough to sit inside the chest torus.
+   This is the collapsed form of the site map; clicking the chest expands it. */
+const WEB_RING_X = 0.115;
+const WEB_RING_Y = 0.052;
+
+const WEB_NODES: [number, number][] = [
+  [0, 0],
+  ...Array.from({ length: 6 }, (_, i) => {
+    const angle = (i / 6) * Math.PI * 2;
+    return [Math.cos(angle) * WEB_RING_X, Math.sin(angle) * WEB_RING_Y] as [number, number];
+  }),
+];
+
+/* hub → every ring node, then around the ring */
+const WEB_EDGES: [number, number][] = [
+  ...Array.from({ length: 6 }, (_, i) => [0, i + 1] as [number, number]),
+  ...Array.from({ length: 6 }, (_, i) => [i + 1, ((i + 1) % 6) + 1] as [number, number]),
+];
+
+export default function RobotPrimitive({
+  onOpenSiteMap,
+}: {
+  onOpenSiteMap?: () => void;
+}) {
   const bodyRef = useRef<THREE.Group>(null);
+  const webRef = useRef<THREE.Group>(null);
+  const webScale = useRef(1);
   const headRef = useRef<THREE.Group>(null);
   const leftArmRef = useRef<THREE.Group>(null);
   const rightArmRef = useRef<THREE.Group>(null);
@@ -23,6 +49,28 @@ export default function RobotPrimitive() {
   const [faceHovered, setFaceHovered] = useState(false);
   const [chestHovered, setChestHovered] = useState(false);
   const [antennaHovered, setAntennaHovered] = useState(false);
+
+  const webPositions = useMemo(() => {
+    const data = new Float32Array(WEB_EDGES.length * 6);
+    WEB_EDGES.forEach(([a, b], i) => {
+      data[i * 6] = WEB_NODES[a][0];
+      data[i * 6 + 1] = WEB_NODES[a][1];
+      data[i * 6 + 2] = 0;
+      data[i * 6 + 3] = WEB_NODES[b][0];
+      data[i * 6 + 4] = WEB_NODES[b][1];
+      data[i * 6 + 5] = 0;
+    });
+    return data;
+  }, []);
+
+  // The 3D canvas has no CSS hover, so drive the cursor by hand.
+  useEffect(() => {
+    if (!onOpenSiteMap) return;
+    document.body.style.cursor = chestHovered ? "pointer" : "";
+    return () => {
+      document.body.style.cursor = "";
+    };
+  }, [chestHovered, onOpenSiteMap]);
 
   useEffect(() => {
     const handlePointerMove = (event: PointerEvent) => {
@@ -96,6 +144,14 @@ export default function RobotPrimitive() {
       visorRef.current.scale.y += (targetScaleY - visorRef.current.scale.y) * 0.28;
     }
 
+    if (webRef.current) {
+      const target = chestHovered ? 1.2 : 1;
+      webScale.current += (target - webScale.current) * 0.12;
+      const breathe = 1 + Math.sin(elapsed * 1.7) * 0.045;
+      webRef.current.scale.setScalar(webScale.current * breathe);
+      webRef.current.rotation.z = Math.sin(elapsed * 0.32) * 0.14;
+    }
+
     if (leftHandRef.current) {
       leftHandRef.current.position.y = -0.52 + Math.sin(elapsed * 1.9) * 0.035;
     }
@@ -137,7 +193,7 @@ export default function RobotPrimitive() {
         />
       </RoundedBox>
 
-      {/* chest hover target */}
+      {/* chest hover + site-map trigger. Generous box so it stays tappable on phones. */}
       <mesh
         position={[0, 0.08, 0.43]}
         onPointerOver={(event) => {
@@ -145,8 +201,13 @@ export default function RobotPrimitive() {
           setChestHovered(true);
         }}
         onPointerOut={() => setChestHovered(false)}
+        onClick={(event) => {
+          if (!onOpenSiteMap) return;
+          event.stopPropagation();
+          onOpenSiteMap();
+        }}
       >
-        <boxGeometry args={[0.9, 0.55, 0.08]} />
+        <boxGeometry args={[1.05, 0.7, 0.08]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
 
@@ -162,20 +223,47 @@ export default function RobotPrimitive() {
           outlineWidth={0.004}
           outlineColor="#0dd6c8"
         >
-          Hi, I am BithBot.{"\n"}Welcome to Bijay&apos;s portfolio.
+          Hi, I am BithBot.{"\n"}Tap my chest to open the site map.
         </Text>
       )}
 
-      {/* chest core */}
+      {/* chest core ring — frames the web */}
       <mesh position={[0, 0.08, 0.38]}>
         <torusGeometry args={[0.16, 0.012, 16, 48]} />
         <meshStandardMaterial
           color="#8ff7ee"
           emissive="#0dd6c8"
-          emissiveIntensity={1.55}
+          emissiveIntensity={chestHovered ? 2.4 : 1.55}
           toneMapped={false}
         />
       </mesh>
+
+      {/* the site map, collapsed: a clustered web glowing on the chest screen */}
+      <group ref={webRef} position={[0, 0.08, 0.383]}>
+        <lineSegments>
+          <bufferGeometry>
+            <bufferAttribute attach="attributes-position" args={[webPositions, 3]} />
+          </bufferGeometry>
+          <lineBasicMaterial
+            color="#8ff7ee"
+            transparent
+            opacity={chestHovered ? 1 : 0.75}
+            toneMapped={false}
+          />
+        </lineSegments>
+
+        {WEB_NODES.map(([x, y], i) => (
+          <mesh key={i} position={[x, y, 0.004]}>
+            <sphereGeometry args={[i === 0 ? 0.021 : 0.015, 12, 12]} />
+            <meshStandardMaterial
+              color="#eaffff"
+              emissive="#0dd6c8"
+              emissiveIntensity={chestHovered ? 3.2 : 1.9}
+              toneMapped={false}
+            />
+          </mesh>
+        ))}
+      </group>
 
       {/* neck */}
       <mesh position={[0, 0.73, 0]}>

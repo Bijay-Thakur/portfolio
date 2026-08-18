@@ -7,7 +7,7 @@ import { experiences } from "@/data/portfolio";
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-16 md:py-24 px-4 max-w-4xl mx-auto">
+    <section id="experience" className="py-16 md:py-24 px-4 sm:px-6 max-w-4xl mx-auto">
       <SectionDivider label="Experience" />
 
       <motion.h2

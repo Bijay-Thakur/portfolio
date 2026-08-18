@@ -29,7 +29,7 @@ const currentFocus = [
 
 export default function About() {
   return (
-    <section id="about" className="py-16 md:py-24 px-4 max-w-6xl mx-auto">
+    <section id="about" className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl 2xl:max-w-7xl mx-auto">
       <SectionDivider label="About" />
 
       <motion.div

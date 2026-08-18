@@ -7,7 +7,7 @@ import { education } from "@/data/portfolio";
 
 export default function Education() {
   return (
-    <section id="education" className="py-16 md:py-24 px-4 max-w-4xl mx-auto">
+    <section id="education" className="py-16 md:py-24 px-4 sm:px-6 max-w-4xl mx-auto">
       <SectionDivider label="Education" />
 
       <motion.h2

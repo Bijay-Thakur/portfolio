@@ -6,7 +6,7 @@ import { leadership } from "@/data/portfolio";
 
 export default function Leadership() {
   return (
-    <section id="leadership" className="py-16 md:py-24 px-4 max-w-6xl mx-auto">
+    <section id="leadership" className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl 2xl:max-w-7xl mx-auto">
       <SectionDivider label="Leadership & Involvement" />
 
       <motion.h2

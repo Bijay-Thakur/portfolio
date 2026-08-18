@@ -22,7 +22,7 @@ const links = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-16 md:py-24 px-4 max-w-3xl mx-auto text-center">
+    <section id="contact" className="py-16 md:py-24 px-4 sm:px-6 max-w-3xl mx-auto text-center">
       <SectionDivider label="Contact" />
 
       <motion.div
