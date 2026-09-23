@@ -4,7 +4,13 @@ import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import SectionDivider from "@/components/ui/SectionDivider";
-import { featuredProjects, otherProjects, type Project } from "@/data/portfolio";
+import {
+  contributionProjects,
+  featuredProjects,
+  otherProjects,
+  productionProjects,
+  type Project,
+} from "@/data/portfolio";
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
@@ -47,6 +53,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {t}
           </span>
         ))}
+        {project.badge && (
+          <span className="text-[10px] px-2 py-0.5 rounded bg-[rgba(13,214,200,0.08)] text-teal/80 border border-[rgba(13,214,200,0.2)]">
+            {project.badge}
+          </span>
+        )}
         {project.isPrototype && (
           <span className="text-[10px] px-2 py-0.5 rounded bg-[rgba(13,214,200,0.08)] text-teal/60 border border-[rgba(13,214,200,0.15)]">
             Prototype
@@ -64,7 +75,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         {project.demoUrl && (
           <a href={project.demoUrl} target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-xs text-muted hover:text-teal border border-[rgba(255,255,255,0.08)] hover:border-[rgba(13,214,200,0.3)] px-3 py-1.5 rounded transition-all">
-            <ExternalLink size={12} /> Demo
+            <ExternalLink size={12} /> {project.linkLabel ?? "Demo"}
           </a>
         )}
       </div>
@@ -82,18 +93,44 @@ const sectionAnim = {
 export default function Projects() {
   return (
     <section id="projects" className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl 2xl:max-w-7xl mx-auto">
+      <SectionDivider label="In Production" />
+
+      <motion.div {...sectionAnim} className="mb-10">
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">In Production</h2>
+        <p className="text-muted text-sm max-w-xl">
+          Shipped products with live deployments — SEC Insight AI and the Bronxville Natural Market storefront.
+        </p>
+      </motion.div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 mb-20 md:mb-24">
+        {productionProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
+      </div>
+
       <SectionDivider label="Featured Projects" />
 
       <motion.div {...sectionAnim} className="mb-10">
         <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">Featured Projects</h2>
         <p className="text-muted text-sm max-w-xl">
-          Headline projects spanning RAG, agentic competitive intelligence, multi-LLM
+          Headline projects spanning agentic competitive intelligence, multi-LLM
           orchestration, multi-agent systems, applied ML, and GenAI media workflows.
         </p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 mb-20 md:mb-24">
         {featuredProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
+      </div>
+
+      <SectionDivider label="Frontend Contributions" />
+
+      <motion.div {...sectionAnim} className="mb-10">
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">Frontend Contributions</h2>
+        <p className="text-muted text-sm max-w-xl">
+          Live sites where I did substantial frontend work as part of a larger build.
+        </p>
+      </motion.div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 mb-20 md:mb-24">
+        {contributionProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
       </div>
 
       <SectionDivider label="Other Projects" />

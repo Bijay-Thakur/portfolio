@@ -14,6 +14,8 @@ export type Project = {
   demoUrl?: string;
   isFeatured?: boolean;
   isPrototype?: boolean;
+  badge?: string;
+  linkLabel?: string;
 };
 
 export type Experience = {
@@ -93,20 +95,6 @@ export const navLinks: NavLink[] = [
 
 export const featuredProjects: Project[] = [
   {
-    slug: "rag-sec-10k",
-    title: "SEC Insight AI — Production Financial QA System",
-    category: "RAG Systems / Retrieval Evaluation",
-    summary:
-      "Source-grounded RAG over Apple's 2025 10-K. Manual Python pipeline plus LlamaIndex v2 with hybrid retrieval, BM25 + semantic RRF, cross-encoder reranking, citation-backed answers, and a 50-question gold evaluation set.",
-    tech: ["Python", "RAG", "LlamaIndex", "ChromaDB", "OpenAI", "BM25", "RAGAS", "Streamlit"],
-    highlight:
-      "Hybrid Recall@5: 0.86 · RAGAS Faithfulness: 0.99 · ~3s query latency (README evaluation set).",
-    honestNote: "Live demo on Apple 2025 10-K; not a production analyst platform.",
-    repoUrl: "https://github.com/Bijay-Thakur/rag-sec-10k",
-    demoUrl: "https://rag-sec-10k-alpha.vercel.app",
-    isFeatured: true,
-  },
-  {
     slug: "rivalscope-ai",
     title: "RivalScope AI — Agentic Competitive Intelligence",
     category: "Agentic Systems / Competitive Intelligence",
@@ -182,6 +170,71 @@ export const featuredProjects: Project[] = [
     honestNote: "Demo product. No commercial podcast hosting or verified user metrics.",
     repoUrl: "https://github.com/Bijay-Thakur/AI-Podcast-Generator",
     isFeatured: true,
+  },
+];
+
+// ─── Production & client work ─────────────────────────────────────────────────
+
+export const productionProjects: Project[] = [
+  {
+    slug: "rag-sec-10k",
+    title: "SEC Insight AI — Production Financial QA System",
+    category: "RAG Systems / Retrieval Evaluation",
+    summary:
+      "Source-grounded RAG over Apple's 2025 10-K. Manual Python pipeline plus LlamaIndex v2 with hybrid retrieval, BM25 + semantic RRF, cross-encoder reranking, citation-backed answers, and a 50-question gold evaluation set.",
+    tech: ["Python", "RAG", "LlamaIndex", "ChromaDB", "OpenAI", "BM25", "RAGAS", "Streamlit"],
+    highlight:
+      "Hybrid Recall@5: 0.86 · RAGAS Faithfulness: 0.99 · ~3s query latency (README evaluation set).",
+    repoUrl: "https://github.com/Bijay-Thakur/rag-sec-10k",
+    demoUrl: "https://rag-sec-10k-alpha.vercel.app",
+    linkLabel: "Live site",
+    badge: "Live",
+  },
+  {
+    slug: "bronxville-natural-market",
+    title: "Bronxville Natural Market",
+    category: "Live product / E-commerce",
+    summary:
+      "Storefront for Bronxville Natural Market, a neighborhood shop for vitamins and natural supplements in Bronxville, NY. Visitors search the catalog, add items to a cart, and choose store pickup or local delivery. Customers manage an account; staff use admin tools for the catalog and the store.",
+    tech: ["Next.js", "React", "Vercel"],
+    highlight:
+      "Shipped and in use by the store and its customers — guest browsing, customer accounts, and admin catalog tools in one app.",
+    demoUrl: "https://supplement-market-snowy.vercel.app/",
+    linkLabel: "Live site",
+    badge: "Live",
+  },
+];
+
+export const contributionProjects: Project[] = [
+  {
+    slug: "webx-nepal",
+    title: "WebX Nepal",
+    category: "Agency site / Frontend",
+    summary:
+      "Public site for WebX Nepal, a Kathmandu studio for web development, branding, and digital marketing. I contributed substantially to the frontend — page structure, service sections, and responsive layout — as part of a larger site build.",
+    tech: ["React", "Next.js"],
+    highlight:
+      "Substantial frontend work on a live agency site used to present services, client stories, and enquiries.",
+    honestNote:
+      "Frontend contribution. The full product was a team build.",
+    demoUrl: "https://webxnepal.com/",
+    linkLabel: "Live site",
+    badge: "Contribution",
+  },
+  {
+    slug: "cvwn-nepal",
+    title: "CVWN Nepal",
+    category: "Nonprofit site / Frontend",
+    summary:
+      "Public site for the Conflict Victim Women National Network, a Nepal nonprofit supporting women affected by armed conflict. I contributed substantially to the frontend, including program sections, site navigation, and the district network view, as part of a larger site build.",
+    tech: ["React"],
+    highlight:
+      "Substantial frontend work on a live nonprofit site covering programs, events, and district outreach.",
+    honestNote:
+      "Frontend contribution. The full product was a team build.",
+    demoUrl: "https://cvwnnepal.org/",
+    linkLabel: "Live site",
+    badge: "Contribution",
   },
 ];
 
