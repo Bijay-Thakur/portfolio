@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Nunito } from "next/font/google";
 import "./globals.css";
-import FluffShapes from "@/components/ui/FluffShapes";
 import PageLoader from "@/components/ui/PageLoader";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 
@@ -40,7 +39,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${nunito.variable}`}>
       <body className="clay-canvas min-h-screen text-snow">
-        <FluffShapes />
         <PageLoader />
         <ScrollProgress />
         <div className="relative z-[1]">{children}</div>

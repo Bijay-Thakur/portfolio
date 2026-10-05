@@ -1,7 +1,7 @@
 "use client";
 
 import { useFrame, useThree } from "@react-three/fiber";
-import { RoundedBox, Sparkles, Text } from "@react-three/drei";
+import { RoundedBox, Sparkles } from "@react-three/drei";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -164,12 +164,12 @@ export default function RobotPrimitive({
   return (
     <group ref={bodyRef} position={[0, ROBOT_BASE_Y, 0]} scale={1.18}>
       <Sparkles
-        count={36}
-        scale={[4.4, 3.2, 2.2]}
-        size={1}
-        speed={0.18}
-        color="#d5d8de"
-        opacity={0.36}
+        count={48}
+        scale={[5.2, 3.8, 2.6]}
+        size={1.55}
+        speed={0.22}
+        color="#3a3d44"
+        opacity={0.9}
       />
 
       {/* torso */}
@@ -205,22 +205,6 @@ export default function RobotPrimitive({
         <boxGeometry args={[1.05, 0.7, 0.08]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
-
-      {chestHovered && (
-        <Text
-          position={[0, 0.53, 0.48]}
-          fontSize={0.085}
-          maxWidth={1.35}
-          textAlign="center"
-          anchorX="center"
-          anchorY="middle"
-          color="#161616"
-          outlineWidth={0.004}
-          outlineColor="#ffffff"
-        >
-          Hi, I am BithBot.{"\n"}Tap my chest to open the site map.
-        </Text>
-      )}
 
       {/* chest core ring — frames the web */}
       <mesh position={[0, 0.08, 0.38]}>

@@ -1,4 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
+import SectionBubbles from "@/components/ui/SectionBubbles";
 import HeroSection from "@/components/hero/HeroSection";
 import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
@@ -14,13 +15,16 @@ export default function HomePage() {
       <Navbar />
       <main>
         <HeroSection />
-        <About />
-        <Projects />
-        <Experience />
-        <Education />
-        <Leadership />
-        <Skills />
-        <Contact />
+        <div className="relative z-0">
+          <SectionBubbles />
+          <About />
+          <Projects />
+          <Experience />
+          <Education />
+          <Leadership />
+          <Skills />
+          <Contact />
+        </div>
       </main>
     </>
   );

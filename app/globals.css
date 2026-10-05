@@ -210,6 +210,34 @@ body {
     padding: 0;
   }
 }
+
+.bubble {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+}
+
+.bubble-black {
+  background: radial-gradient(circle at 32% 26%, #6a6e76 0%, #2a2d32 40%, #0e0e0e 78%);
+  box-shadow:
+    0 18px 28px rgba(0, 0, 0, 0.16),
+    inset 0 -16px 20px rgba(0, 0, 0, 0.4),
+    inset 0 10px 14px rgba(255, 255, 255, 0.22);
+}
+
+.bubble-grey {
+  background: radial-gradient(circle at 32% 26%, #ffffff 0%, #d7dae0 36%, #8b919a 100%);
+  box-shadow:
+    0 16px 26px rgba(22, 22, 22, 0.12),
+    inset 0 -14px 18px rgba(22, 22, 22, 0.14),
+    inset 0 10px 14px rgba(255, 255, 255, 0.9);
+}
+
+.bubble-xs { width: 22px; height: 22px; }
+.bubble-sm { width: 44px; height: 44px; }
+.bubble-md { width: 76px; height: 76px; }
+.bubble-lg { width: 118px; height: 118px; }
+.bubble-xl { width: 168px; height: 168px; }
 }
 
 * { box-sizing: border-box; }

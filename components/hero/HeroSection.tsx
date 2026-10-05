@@ -31,11 +31,6 @@ export default function HeroSection() {
         <div className="aurora absolute -left-[10%] top-[8%] h-[42vh] w-[42vh] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.9),transparent_68%)] blur-2xl" />
         <div className="aurora aurora-slow absolute -right-[8%] top-[28%] h-[48vh] w-[48vh] rounded-full bg-[radial-gradient(circle,rgba(180,184,192,0.45),transparent_68%)] blur-2xl" />
         <div className="aurora absolute bottom-[6%] left-[30%] h-[36vh] w-[36vh] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.75),transparent_68%)] blur-2xl" />
-        <span className="puff puff-lg left-[8%] top-[18%]" />
-        <span className="puff puff-sm left-[22%] top-[30%] puff-dark" />
-        <span className="puff puff-md right-[10%] top-[16%]" />
-        <span className="puff-pill right-[18%] bottom-[22%]" />
-        <span className="puff puff-sm bottom-[18%] left-[12%] puff-dark" />
       </div>
 
       {/* Robot and particles occupy the whole hero, not a card. */}

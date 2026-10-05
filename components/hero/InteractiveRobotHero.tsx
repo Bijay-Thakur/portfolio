@@ -42,10 +42,10 @@ function CursorParticles() {
   const windowPointer = useRef({ x: 0, y: 0 });
   const count =
     typeof window !== "undefined" && window.innerWidth < 768
-      ? 90
+      ? 130
       : typeof window !== "undefined" && window.innerWidth < 1024
-        ? 160
-        : 320;
+        ? 230
+        : 440;
 
   useEffect(() => {
     const handlePointerMove = (event: PointerEvent) => {
@@ -151,13 +151,14 @@ function CursorParticles() {
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.048}
-        color="#c5c8ce"
+        size={0.072}
+        color="#2c3036"
         map={circleTexture}
         transparent
-        opacity={0.78}
+        opacity={0.92}
         depthWrite={false}
-        alphaTest={0.01}
+        alphaTest={0.02}
+        sizeAttenuation
       />
     </points>
   );
