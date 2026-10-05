@@ -27,7 +27,7 @@ export default function Leadership() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.38, delay: i * 0.07, ease: "easeOut" }}
-            className="min-w-0 bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-4 sm:p-5 hover:border-[rgba(13,214,200,0.28)] transition-colors"
+            className="clay-card clay-rose min-w-0 p-4 sm:p-5"
           >
             <h3 className="font-semibold text-snow text-base">{item.title}</h3>
             <p className="text-teal/60 text-xs mt-0.5 mb-3">
@@ -37,8 +37,7 @@ export default function Leadership() {
             {item.tags && (
               <div className="flex flex-wrap gap-1.5">
                 {item.tags.map((tag) => (
-                    <span key={tag}
-                    className="text-[10px] px-2 py-0.5 rounded bg-[rgba(13,214,200,0.07)] text-snow border border-[rgba(13,214,200,0.18)]">
+                    <span key={tag} className="clay-chip px-2.5 py-1 text-[10px] font-bold">
                     {tag}
                   </span>
                 ))}

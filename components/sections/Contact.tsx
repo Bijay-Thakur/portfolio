@@ -51,9 +51,9 @@ export default function Contact() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.32, delay: 0.08 + i * 0.06, ease: "easeOut" }}
               whileHover={{ y: -3, transition: { duration: 0.15 } }}
-              className="flex items-center gap-3 bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.12)] rounded-lg p-4 hover:border-[rgba(13,214,200,0.38)] hover:bg-[rgba(13,214,200,0.05)] transition-[border-color,background] group min-w-0"
+              className={`clay-card ${["clay-lilac", "clay-peach", "clay-mint", "clay-sky"][i % 4]} group flex min-w-0 items-center gap-3 p-4`}
             >
-              <div className="w-9 h-9 rounded-full bg-[rgba(13,214,200,0.08)] border border-[rgba(13,214,200,0.2)] flex items-center justify-center text-teal/70 group-hover:text-teal transition-colors shrink-0">
+              <div className="clay-icon h-10 w-10 shrink-0">
                 {iconMap[link.icon]}
               </div>
               <div className="min-w-0 text-left">
@@ -71,14 +71,14 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.4 }}
           whileHover={{ scale: 1.03 }}
-          className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-teal text-ocean text-sm font-semibold rounded hover:bg-teal-light transition-colors"
+          className="clay-btn inline-flex items-center gap-2 px-6 py-3 text-sm font-bold sm:px-8"
         >
           <Mail size={15} /> Send an Email
         </motion.a>
       </motion.div>
 
-      <div className="mt-14 sm:mt-20 pt-8 border-t border-[rgba(255,255,255,0.06)]">
-        <p className="text-xs text-muted/40">
+      <div className="mt-14 pt-8 sm:mt-20">
+        <p className="text-xs font-bold text-muted/70">
           © {new Date().getFullYear()} Bijay Thakur · Built with Next.js, Tailwind CSS & Framer Motion
         </p>
       </div>

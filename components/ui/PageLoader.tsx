@@ -44,9 +44,8 @@ export default function PageLoader() {
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
+      className="clay-canvas fixed inset-0 z-[9999] flex flex-col items-center justify-center"
       style={{
-        background: "linear-gradient(160deg, #020A14 0%, #040D16 60%, #051525 100%)",
         opacity: leaving ? 0 : 1,
         transform: leaving ? "translateY(-4%)" : "translateY(0)",
         transition: leaving
@@ -55,81 +54,34 @@ export default function PageLoader() {
         pointerEvents: "none",
       }}
     >
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(13,214,200,1) 1px,transparent 1px),linear-gradient(90deg,rgba(13,214,200,1) 1px,transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(13,214,200,0.08) 0%, transparent 70%)",
-        }}
-      />
-
       <div className="relative flex flex-col items-center gap-8">
-        <div className="relative">
-          <div
-            className="absolute -inset-6 rounded-full"
-            style={{
-              background: "radial-gradient(circle, rgba(13,214,200,0.12) 0%, transparent 70%)",
-              animation: "loader-pulse 2s ease-in-out infinite",
-            }}
-          />
-          <span
-            className="select-none font-serif text-7xl font-semibold sm:text-8xl"
-            style={{
-              color: "#0DD6C8",
-              letterSpacing: "0.12em",
-              textShadow:
-                "0 0 40px rgba(13,214,200,0.45), 0 0 80px rgba(13,214,200,0.18)",
-            }}
-          >
+        <div className="clay-card clay-lilac flex h-36 w-36 items-center justify-center rounded-full sm:h-40 sm:w-40">
+          <span className="select-none font-serif text-5xl font-semibold text-teal sm:text-6xl">
             B.T.
           </span>
         </div>
 
-        <p
-          className="text-xs font-medium uppercase tracking-[0.35em]"
-          style={{ color: "rgba(228,246,248,0.45)" }}
-        >
+        <p className="text-xs font-bold uppercase tracking-[0.35em] text-muted">
           Bijay Thakur
         </p>
 
         <div className="flex w-48 flex-col items-center gap-2 sm:w-64">
-          <div
-            className="relative h-px w-full overflow-hidden rounded-full"
-            style={{ background: "rgba(13,214,200,0.12)" }}
-          >
+          <div className="clay-inset relative h-3 w-full overflow-hidden rounded-full">
             <div
               className="absolute inset-y-0 left-0 rounded-full"
               style={{
                 width: `${progress}%`,
-                background: "linear-gradient(90deg, rgba(13,214,200,0.5), #0DD6C8)",
-                boxShadow: "0 0 8px rgba(13,214,200,0.7)",
+                background: "linear-gradient(90deg, #ffffff, #9aa0a8, #161616)",
+                boxShadow: "3px 0 8px rgba(111,92,232,0.28)",
                 transition: "width 0.2s ease-out",
               }}
             />
           </div>
-          <span
-            className="text-[11px] tabular-nums"
-            style={{ color: "rgba(13,214,200,0.55)", letterSpacing: "0.1em" }}
-          >
+          <span className="text-[11px] font-bold tabular-nums tracking-[0.1em] text-teal">
             {progress}%
           </span>
         </div>
       </div>
-
-      <style>{`
-        @keyframes loader-pulse {
-          0%, 100% { opacity: 0.6; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.08); }
-        }
-      `}</style>
     </div>
   );
 }

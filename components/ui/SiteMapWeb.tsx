@@ -369,7 +369,7 @@ function SiteMapDialog({ onClose }: { onClose: () => void }) {
           line.setAttribute("x2", String(nb.x));
           line.setAttribute("y2", String(nb.y));
           line.style.opacity = String(touched ? 0.95 : 0.24 + strain * 0.5);
-          line.style.strokeWidth = touched ? "1.8" : "1";
+          line.style.strokeWidth = touched ? "4" : "2.5";
         });
       }
 
@@ -448,13 +448,13 @@ function SiteMapDialog({ onClose }: { onClose: () => void }) {
   return (
     <motion.div
       className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, pointerEvents: "none" }}
+      animate={{ opacity: 1, pointerEvents: "auto" }}
+      exit={{ opacity: 0, pointerEvents: "none" }}
       transition={{ duration: 0.2 }}
     >
       <div
-        className="absolute inset-0 bg-[#01070d]/80 backdrop-blur-md"
+        className="absolute inset-0 bg-[#111111]/40 backdrop-blur-md"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -464,12 +464,10 @@ function SiteMapDialog({ onClose }: { onClose: () => void }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="sitemap-title"
-        className="relative flex h-[min(84svh,640px)] max-h-full w-full max-w-[860px] flex-col overflow-hidden rounded-2xl border border-[rgba(13,214,200,0.28)] bg-[#03101b]/95 shadow-[0_30px_120px_rgba(0,0,0,0.65)] sm:rounded-3xl"
+        className="clay-card clay-lilac relative flex h-[min(84svh,640px)] max-h-full w-full max-w-[860px] flex-col overflow-hidden"
         {...overlayMotion}
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(13,214,200,0.14),transparent_45%),radial-gradient(circle_at_82%_88%,rgba(69,190,255,0.12),transparent_48%)]" />
-
-        <header className="relative flex items-start justify-between gap-3 border-b border-white/[0.07] px-4 py-3 sm:px-6 sm:py-4">
+        <header className="relative flex items-start justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
           <div className="min-w-0">
             <h2
               id="sitemap-title"
@@ -486,7 +484,7 @@ function SiteMapDialog({ onClose }: { onClose: () => void }) {
             type="button"
             onClick={onClose}
             aria-label="Close site map"
-            className="shrink-0 rounded-full border border-white/10 bg-white/[0.04] p-2 text-white/70 transition hover:border-[rgba(13,214,200,0.5)] hover:text-[#8ff7ee] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8ff7ee]/70"
+            className="clay-icon h-9 w-9 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal/50"
           >
             <X size={16} />
           </button>
@@ -500,7 +498,7 @@ function SiteMapDialog({ onClose }: { onClose: () => void }) {
                 ref={(el) => {
                   lineRefs.current[i] = el;
                 }}
-                stroke="#8ff7ee"
+                stroke="#b7bcc4"
                 strokeLinecap="round"
                 style={{ opacity: 0.3 }}
               />
@@ -525,14 +523,14 @@ function SiteMapDialog({ onClose }: { onClose: () => void }) {
                 if (event.detail === 0) navigate(node.href);
               }}
               aria-label={`Go to ${node.label} section`}
-              className={`absolute left-0 top-0 flex touch-none select-none flex-col items-center justify-center rounded-full border text-center backdrop-blur-sm transition-[background-color,border-color,box-shadow] duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8ff7ee]/80 ${
+              className={`absolute left-0 top-0 flex touch-none select-none flex-col items-center justify-center rounded-full text-center transition-[background,box-shadow] duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal/50 ${
                 active === i
-                  ? "cursor-grabbing border-[#8ff7ee] bg-[rgba(13,214,200,0.25)] shadow-[0_0_34px_rgba(13,214,200,0.6)]"
-                  : "cursor-grab border-[rgba(13,214,200,0.45)] bg-[rgba(4,20,30,0.85)] shadow-[0_0_20px_rgba(13,214,200,0.22)] hover:border-[#8ff7ee] hover:bg-[rgba(13,214,200,0.16)]"
+                  ? "clay-bubble-active cursor-grabbing"
+                  : "clay-bubble cursor-grab"
               }`}
               style={{ visibility: "hidden" }}
             >
-              <span className="pointer-events-none text-[0.8em] font-semibold leading-none tracking-[0.12em] text-[#8ff7ee]/70">
+              <span className="pointer-events-none text-[0.8em] font-bold leading-none tracking-[0.12em] text-teal/70">
                 {node.index}
               </span>
               <span className="pointer-events-none mt-[0.35em] max-w-full overflow-hidden whitespace-nowrap px-1 text-[1em] font-semibold uppercase leading-none tracking-[0.02em] text-snow">
@@ -542,7 +540,7 @@ function SiteMapDialog({ onClose }: { onClose: () => void }) {
           ))}
         </div>
 
-        <footer className="relative hidden border-t border-white/[0.07] px-4 py-2.5 text-center text-[10px] text-muted/70 sm:block sm:px-6 sm:text-[11px]">
+        <footer className="relative hidden px-4 py-2.5 text-center text-[10px] font-bold text-muted sm:block sm:px-6 sm:text-[11px]">
           Every bubble is a section — drag to stretch the web, tap to travel.
         </footer>
       </motion.div>

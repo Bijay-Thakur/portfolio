@@ -27,15 +27,14 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.38, delay: i * 0.06, ease: "easeOut" }}
-            className="bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-4 sm:p-5 hover:border-[rgba(13,214,200,0.28)] transition-colors"
+            className={`clay-card ${["clay-lilac", "clay-mint", "clay-peach", "clay-sky", "clay-rose"][i % 5]} p-4 sm:p-5`}
           >
-            <h3 className="text-teal/80 text-xs tracking-[0.18em] uppercase font-medium mb-4">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-teal">
               {group.label}
             </h3>
             <div className="flex flex-wrap gap-2">
               {group.skills.map((skill) => (
-                <span key={skill}
-                  className="text-xs px-2.5 py-1 rounded bg-[rgba(255,255,255,0.04)] text-snow/80 border border-[rgba(255,255,255,0.07)] hover:border-[rgba(13,214,200,0.3)] hover:text-snow transition-colors cursor-default">
+                <span key={skill} className="clay-chip cursor-default px-2.5 py-1 text-xs font-bold">
                   {skill}
                 </span>
               ))}

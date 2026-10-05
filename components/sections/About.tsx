@@ -37,19 +37,17 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.48, ease: "easeOut" }}
-        className="relative overflow-hidden rounded-3xl border border-[rgba(13,214,200,0.16)] bg-[linear-gradient(135deg,rgba(13,214,200,0.08),rgba(255,215,120,0.035)_38%,rgba(255,255,255,0.025))] p-[1px] shadow-[0_24px_90px_rgba(0,0,0,0.28)]"
+        className="clay-card clay-lilac relative overflow-hidden p-2"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(13,214,200,0.14),transparent_28%),radial-gradient(circle_at_82%_8%,rgba(255,215,120,0.08),transparent_26%)]" />
-
-        <div className="relative grid gap-7 rounded-3xl bg-[#03101b]/88 p-5 backdrop-blur-md sm:p-7 lg:grid-cols-[0.9fr_1.35fr] lg:gap-8 lg:p-8">
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-white/[0.06] bg-black/18 p-5 text-center">
+        <div className="relative grid gap-7 p-4 sm:p-6 lg:grid-cols-[0.9fr_1.35fr] lg:gap-8 lg:p-7">
+          <div className="clay-inset flex flex-col items-center justify-center p-5 text-center">
             <div className="relative flex h-52 w-52 items-center justify-center sm:h-60 sm:w-60">
-              <div className="ripple-ring absolute inset-0 rounded-full border border-[rgba(13,214,200,0.35)]" />
-              <div className="ripple-ring ripple-ring-2 absolute inset-0 rounded-full border border-[rgba(13,214,200,0.24)]" />
-              <div className="ripple-ring ripple-ring-3 absolute inset-0 rounded-full border border-[rgba(255,215,120,0.14)]" />
-              <div className="pointer-events-none absolute inset-3 rounded-full border border-[rgba(13,214,200,0.18)] bg-[radial-gradient(circle,rgba(13,214,200,0.1),transparent_62%)]" />
+              <div className="ripple-ring absolute inset-0 rounded-full border border-[#c5c8ce]" />
+              <div className="ripple-ring ripple-ring-2 absolute inset-0 rounded-full border border-[#9aa0a8]" />
+              <div className="ripple-ring ripple-ring-3 absolute inset-0 rounded-full border border-[#161616]/30" />
+              <div className="pointer-events-none absolute inset-3 rounded-full bg-[radial-gradient(circle,#fff,transparent_68%)]" />
 
-              <div className="relative z-10 h-40 w-40 overflow-hidden rounded-full border-2 border-[rgba(13,214,200,0.55)] bg-[#061521] shadow-[0_0_46px_rgba(13,214,200,0.18)] sm:h-48 sm:w-48">
+              <div className="clay-card relative z-10 h-40 w-40 overflow-hidden rounded-full sm:h-48 sm:w-48">
                 <img
                   src="/images/profileImage.png"
                   alt="Bijay Thakur"
@@ -72,10 +70,7 @@ export default function About() {
 
             <div className="mt-5 flex flex-wrap justify-center gap-2">
               {profileTags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-[rgba(13,214,200,0.22)] bg-[rgba(13,214,200,0.06)] px-3 py-1 text-[11px] font-medium text-snow"
-                >
+                <span key={tag} className="clay-chip px-3 py-1 text-[11px] font-bold">
                   {tag}
                 </span>
               ))}
@@ -106,7 +101,7 @@ export default function About() {
               {focusCards.map((card) => (
                 <div
                   key={card.title}
-                  className="rounded-2xl border border-[rgba(13,214,200,0.12)] bg-white/[0.025] p-4 transition duration-300 hover:border-[rgba(13,214,200,0.34)] hover:bg-[rgba(13,214,200,0.055)] hover:shadow-[0_12px_40px_rgba(13,214,200,0.07)]"
+                  className="clay-card clay-peach p-4"
                 >
                   <h3 className="text-sm font-semibold text-snow">{card.title}</h3>
                   <p className="mt-2 text-xs leading-relaxed text-muted/75">{card.text}</p>
@@ -114,7 +109,7 @@ export default function About() {
               ))}
             </div>
 
-            <div className="mt-6 border-t border-white/[0.06] pt-5">
+            <div className="mt-6 pt-5">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-snow/70">
                 Currently focused on
               </p>
@@ -122,7 +117,7 @@ export default function About() {
                 {currentFocus.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-white/[0.09] bg-white/[0.035] px-3 py-1 text-xs text-snow/85"
+                    className="clay-chip px-3 py-1 text-xs font-bold"
                   >
                     {tag}
                   </span>

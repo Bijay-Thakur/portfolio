@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Nunito } from "next/font/google";
 import "./globals.css";
+import FluffShapes from "@/components/ui/FluffShapes";
 import PageLoader from "@/components/ui/PageLoader";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 
@@ -12,9 +13,10 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
+  weight: ["500", "700", "800"],
   display: "swap",
 });
 
@@ -36,25 +38,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-ocean text-snow">
-        {/* Ambient depth layer behind every section (negative z paints under content). */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_15%_12%,rgba(13,214,200,0.07),transparent_42%),radial-gradient(circle_at_85%_78%,rgba(69,190,255,0.06),transparent_46%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed inset-0 -z-10 opacity-[0.035]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(13,214,200,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(13,214,200,0.9) 1px, transparent 1px)",
-            backgroundSize: "clamp(52px, 5vw, 84px) clamp(52px, 5vw, 84px)",
-          }}
-        />
+    <html lang="en" className={`${cormorant.variable} ${nunito.variable}`}>
+      <body className="clay-canvas min-h-screen text-snow">
+        <FluffShapes />
         <PageLoader />
         <ScrollProgress />
-        {children}
+        <div className="relative z-[1]">{children}</div>
       </body>
     </html>
   );

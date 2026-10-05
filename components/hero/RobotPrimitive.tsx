@@ -168,28 +168,23 @@ export default function RobotPrimitive({
         scale={[4.4, 3.2, 2.2]}
         size={1}
         speed={0.18}
-        color="#0dd6c8"
+        color="#d5d8de"
         opacity={0.36}
       />
 
       {/* torso */}
-      <RoundedBox args={[1.25, 1.25, 0.62]} radius={0.18} smoothness={6}>
-        <meshStandardMaterial
-          color="#10131b"
-          metalness={0.55}
-          roughness={0.28}
-          emissive="#070707"
-        />
+      <RoundedBox args={[1.25, 1.25, 0.62]} radius={0.22} smoothness={8}>
+        <meshStandardMaterial color="#f4f5f7" metalness={0.02} roughness={0.72} />
       </RoundedBox>
 
       {/* chest plate */}
-      <RoundedBox position={[0, 0.08, 0.34]} args={[0.76, 0.42, 0.04]} radius={0.08} smoothness={5}>
+      <RoundedBox position={[0, 0.08, 0.34]} args={[0.76, 0.42, 0.04]} radius={0.1} smoothness={6}>
         <meshStandardMaterial
-          color={chestHovered ? "#062f36" : "#05070c"}
-          metalness={0.4}
-          roughness={0.2}
-          emissive="#0dd6c8"
-          emissiveIntensity={chestHovered ? 1.65 : 0.28}
+          color={chestHovered ? "#2c2f35" : "#1a1c20"}
+          metalness={0.02}
+          roughness={0.55}
+          emissive="#111111"
+          emissiveIntensity={chestHovered ? 0.35 : 0.08}
         />
       </RoundedBox>
 
@@ -219,9 +214,9 @@ export default function RobotPrimitive({
           textAlign="center"
           anchorX="center"
           anchorY="middle"
-          color="#e4ffff"
+          color="#161616"
           outlineWidth={0.004}
-          outlineColor="#0dd6c8"
+          outlineColor="#ffffff"
         >
           Hi, I am BithBot.{"\n"}Tap my chest to open the site map.
         </Text>
@@ -231,10 +226,10 @@ export default function RobotPrimitive({
       <mesh position={[0, 0.08, 0.38]}>
         <torusGeometry args={[0.16, 0.012, 16, 48]} />
         <meshStandardMaterial
-          color="#8ff7ee"
-          emissive="#0dd6c8"
-          emissiveIntensity={chestHovered ? 2.4 : 1.55}
-          toneMapped={false}
+          color="#161616"
+          emissive="#3a3d44"
+          emissiveIntensity={chestHovered ? 0.55 : 0.22}
+          roughness={0.55}
         />
       </mesh>
 
@@ -245,7 +240,7 @@ export default function RobotPrimitive({
             <bufferAttribute attach="attributes-position" args={[webPositions, 3]} />
           </bufferGeometry>
           <lineBasicMaterial
-            color="#8ff7ee"
+            color="#ffffff"
             transparent
             opacity={chestHovered ? 1 : 0.75}
             toneMapped={false}
@@ -256,10 +251,10 @@ export default function RobotPrimitive({
           <mesh key={i} position={[x, y, 0.004]}>
             <sphereGeometry args={[i === 0 ? 0.021 : 0.015, 12, 12]} />
             <meshStandardMaterial
-              color="#eaffff"
-              emissive="#0dd6c8"
-              emissiveIntensity={chestHovered ? 3.2 : 1.9}
-              toneMapped={false}
+              color="#ffffff"
+              emissive="#d5d8de"
+              emissiveIntensity={chestHovered ? 0.55 : 0.22}
+              roughness={0.45}
             />
           </mesh>
         ))}
@@ -268,29 +263,23 @@ export default function RobotPrimitive({
       {/* neck */}
       <mesh position={[0, 0.73, 0]}>
         <cylinderGeometry args={[0.18, 0.18, 0.24, 32]} />
-        <meshStandardMaterial color="#1c2430" metalness={0.65} roughness={0.22} />
+        <meshStandardMaterial color="#e6e8ec" metalness={0.02} roughness={0.75} />
       </mesh>
 
       {/* head */}
       <group ref={headRef} position={[0, 1.18, 0]}>
         <RoundedBox args={[1.08, 0.82, 0.72]} radius={0.18} smoothness={8}>
-          <meshStandardMaterial
-            color="#111722"
-            metalness={0.62}
-            roughness={0.24}
-            emissive="#0a0a0a"
-          />
+          <meshStandardMaterial color="#f7f8fa" metalness={0.02} roughness={0.7} />
         </RoundedBox>
 
         {/* visor */}
         <RoundedBox ref={visorRef} position={[0, 0.05, 0.39]} args={[0.74, 0.24, 0.045]} radius={0.08} smoothness={5}>
           <meshStandardMaterial
-            color="#050607"
-            emissive="#0dd6c8"
-            emissiveIntensity={1.25}
-            metalness={0.2}
-            roughness={0.12}
-            toneMapped={false}
+            color="#161616"
+            emissive="#3a3d44"
+            emissiveIntensity={0.35}
+            metalness={0.02}
+            roughness={0.42}
           />
         </RoundedBox>
 
@@ -310,20 +299,20 @@ export default function RobotPrimitive({
         {/* visor scan line */}
         <mesh position={[0, 0.08, 0.425]}>
           <boxGeometry args={[0.54, 0.025, 0.012]} />
-          <meshBasicMaterial color="#8ff7ee" toneMapped={false} />
+          <meshBasicMaterial color="#ffffff" />
         </mesh>
 
         {faceHovered && (
           <mesh position={[0, -0.16, 0.445]} rotation={[0, 0, Math.PI]}>
             <torusGeometry args={[0.18, 0.012, 8, 32, Math.PI]} />
-            <meshBasicMaterial color="#eaffff" toneMapped={false} />
+            <meshBasicMaterial color="#161616" />
           </mesh>
         )}
 
         {/* antenna */}
         <mesh position={[0, 0.56, 0]} rotation={[0, 0, 0]}>
           <cylinderGeometry args={[0.018, 0.018, 0.32, 16]} />
-          <meshStandardMaterial color="#0dd6c8" emissive="#0dd6c8" emissiveIntensity={0.45} />
+          <meshStandardMaterial color="#2a2d32" emissive="#111111" emissiveIntensity={0.12} roughness={0.6} />
         </mesh>
         <mesh
           position={[0, 0.76, 0]}
@@ -335,10 +324,10 @@ export default function RobotPrimitive({
         >
           <sphereGeometry args={[0.065, 24, 24]} />
           <meshStandardMaterial
-            color={antennaHovered ? "#ffe66d" : "#8ff7ee"}
-            emissive={antennaHovered ? "#ffd000" : "#0dd6c8"}
-            emissiveIntensity={antennaHovered ? 2.4 : 1.3}
-            toneMapped={false}
+            color={antennaHovered ? "#ffffff" : "#161616"}
+            emissive={antennaHovered ? "#d5d8de" : "#111111"}
+            emissiveIntensity={antennaHovered ? 0.55 : 0.2}
+            roughness={0.45}
           />
         </mesh>
 
@@ -359,21 +348,21 @@ export default function RobotPrimitive({
       {/* arms */}
       <group ref={leftArmRef} position={[-0.82, 0.08, 0]} rotation={[0, 0, 0.22]}>
         <RoundedBox args={[0.26, 0.86, 0.28]} radius={0.1} smoothness={5}>
-          <meshStandardMaterial color="#111722" metalness={0.55} roughness={0.28} />
+          <meshStandardMaterial color="#e8eaee" metalness={0.02} roughness={0.72} />
         </RoundedBox>
         <mesh ref={leftHandRef} position={[0, -0.52, 0]}>
           <sphereGeometry args={[0.16, 24, 24]} />
-          <meshStandardMaterial color="#0dd6c8" metalness={0.45} roughness={0.25} />
+          <meshStandardMaterial color="#f7f8fa" metalness={0.02} roughness={0.55} />
         </mesh>
       </group>
 
       <group ref={rightArmRef} position={[0.82, 0.08, 0]} rotation={[0, 0, -0.22]}>
         <RoundedBox args={[0.26, 0.86, 0.28]} radius={0.1} smoothness={5}>
-          <meshStandardMaterial color="#111722" metalness={0.55} roughness={0.28} />
+          <meshStandardMaterial color="#e8eaee" metalness={0.02} roughness={0.72} />
         </RoundedBox>
         <mesh ref={rightHandRef} position={[0, -0.52, 0]}>
           <sphereGeometry args={[0.16, 24, 24]} />
-          <meshStandardMaterial color="#0dd6c8" metalness={0.45} roughness={0.25} />
+          <meshStandardMaterial color="#f7f8fa" metalness={0.02} roughness={0.55} />
         </mesh>
       </group>
     </group>

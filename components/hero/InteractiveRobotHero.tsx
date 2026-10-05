@@ -23,10 +23,10 @@ function hasWebGL() {
 function Scene({ onOpenSiteMap }: { onOpenSiteMap?: () => void }) {
   return (
     <>
-      <ambientLight intensity={0.78} />
-      <directionalLight position={[3, 4, 5]} intensity={1.55} color="#dffcff" />
-      <pointLight position={[-3, 2, 3]} intensity={1.7} color="#0dd6c8" />
-      <pointLight position={[2.8, 1.5, -2.6]} intensity={1.7} color="#45beff" />
+      <ambientLight intensity={1.05} />
+      <directionalLight position={[3, 4, 5]} intensity={1.35} color="#ffffff" />
+      <pointLight position={[-3, 2, 3]} intensity={1.05} color="#f5f6f8" />
+      <pointLight position={[2.8, 1.5, -2.6]} intensity={0.85} color="#c5c8ce" />
       <CursorParticles />
 
       <Float speed={1.15} rotationIntensity={0.18} floatIntensity={0.1}>
@@ -152,7 +152,7 @@ function CursorParticles() {
       </bufferGeometry>
       <pointsMaterial
         size={0.048}
-        color="#8ff7ee"
+        color="#c5c8ce"
         map={circleTexture}
         transparent
         opacity={0.78}
@@ -182,15 +182,7 @@ export default function InteractiveRobotHero({
   return (
     <div className="relative h-full min-h-[100svh] overflow-visible">
       {/* full-hero glow behind robot */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(13,214,200,0.18),transparent_30%),radial-gradient(circle_at_54%_40%,rgba(69,190,255,0.12),transparent_42%)]" />
-      <div
-        className="absolute inset-0 opacity-[0.075]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(13,214,200,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(13,214,200,0.8) 1px, transparent 1px)",
-          backgroundSize: "clamp(42px, 8vw, 64px) clamp(42px, 8vw, 64px)",
-        }}
-      />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(255,255,255,0.55),transparent_36%),radial-gradient(circle_at_54%_40%,rgba(201,182,240,0.28),transparent_42%)]" />
 
       <Canvas
         aria-hidden="true"
@@ -199,7 +191,8 @@ export default function InteractiveRobotHero({
         dpr={[1, 1.4]}
         gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
         onCreated={({ gl }) => {
-          gl.setClearColor(0x000000, 0);
+          gl.setClearColor("#eef0f3", 1);
+          gl.domElement.style.background = "transparent";
         }}
         onError={() => setWebglFailed(true)}
       >

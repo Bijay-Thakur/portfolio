@@ -23,7 +23,7 @@ export default function Education() {
       {/* ── Timeline ─────────────────────────────────── */}
       <div className="relative">
         {/* Vertical spine */}
-        <div className="absolute left-3 sm:left-5 top-0 bottom-0 w-px bg-gradient-to-b from-[rgba(13,214,200,0.5)] via-[rgba(13,214,200,0.15)] to-transparent" />
+        <div className="absolute left-3 top-0 bottom-0 w-2 rounded-full bg-[#e4e6ea] shadow-[inset_0_2px_4px_rgba(22,22,22,0.12)] sm:left-5" />
 
         <div className="space-y-8 sm:space-y-10">
           {education.map((edu, i) => (
@@ -36,10 +36,9 @@ export default function Education() {
               className="relative pl-8 sm:pl-14"
             >
               {/* Timeline dot */}
-              <div className="absolute left-[6px] sm:left-[14px] top-3 w-3 h-3 rounded-full border-2 border-teal bg-ocean shadow-[0_0_8px_rgba(13,214,200,0.5)]" />
+              <div className="clay-icon absolute left-[2px] top-3 h-4 w-4 sm:left-[10px]" />
 
-              {/* Card */}
-              <div className="bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-4 sm:p-5 hover:border-[rgba(13,214,200,0.28)] transition-colors">
+              <div className="clay-card clay-sky p-4 sm:p-5">
 
                 {/* Row 1 — school + date */}
                 <div className="flex flex-wrap items-start justify-between gap-2 mb-1">
@@ -47,7 +46,7 @@ export default function Education() {
                     <GraduationCap size={15} className="text-teal/60 shrink-0" />
                     <h3 className="font-semibold text-snow text-base leading-snug">{edu.school}</h3>
                   </div>
-                  <span className="text-xs text-snow font-medium border border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.05)] px-2.5 py-1 rounded shrink-0">
+                  <span className="clay-chip shrink-0 px-2.5 py-1 text-xs font-bold">
                     {edu.period}
                   </span>
                 </div>
@@ -57,11 +56,11 @@ export default function Education() {
 
                 {/* GPA + Honor row */}
                 <div className="flex flex-wrap gap-2 sm:pl-5 mb-3">
-                  <span className="flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-[rgba(13,214,200,0.08)] border border-[rgba(13,214,200,0.2)] text-teal font-semibold">
+                  <span className="clay-chip flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold text-teal">
                     GPA {edu.gpa}
                   </span>
-                  <span className="flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-[rgba(255,215,0,0.07)] border border-[rgba(255,215,0,0.2)] text-yellow-300/80">
-                    <Star size={10} className="fill-yellow-400/60 text-yellow-400/60" />
+                  <span className="clay-chip flex items-center gap-1 bg-[#f4f5f7] px-2.5 py-1 text-[11px] font-bold text-[#161616]">
+                    <Star size={10} className="fill-[#161616] text-[#161616]" />
                     {edu.honor}
                   </span>
                 </div>

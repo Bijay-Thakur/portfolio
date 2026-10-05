@@ -24,11 +24,11 @@ export default function ScrollProgress() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[2px] bg-transparent"
+      className="pointer-events-none fixed inset-x-3 top-1 z-[60] h-1.5 overflow-hidden rounded-full bg-[#e4e6ea] shadow-[inset_2px_2px_4px_rgba(22,22,22,0.12),inset_-1px_-1px_3px_rgba(255,255,255,0.9)] sm:inset-x-4"
       aria-hidden="true"
     >
       <div
-        className="h-full bg-gradient-to-r from-[#0dd6c8] via-[#8ff7ee] to-[#45beff] shadow-[0_0_12px_rgba(13,214,200,0.6)] transition-[width] duration-150 ease-out"
+        className="h-full rounded-full bg-gradient-to-r from-[#ffffff] via-[#9aa0a8] to-[#161616] shadow-[2px_0_6px_rgba(22,22,22,0.25)] transition-[width] duration-150 ease-out"
         style={{ width: `${progress}%` }}
       />
     </div>

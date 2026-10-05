@@ -21,7 +21,7 @@ export default function Experience() {
       </motion.h2>
 
       <div className="relative">
-        <div className="absolute left-3 sm:left-5 top-0 bottom-0 w-px bg-gradient-to-b from-[rgba(13,214,200,0.5)] via-[rgba(13,214,200,0.12)] to-transparent" />
+        <div className="absolute left-3 top-0 bottom-0 w-2 rounded-full bg-[#e4e6ea] shadow-[inset_0_2px_4px_rgba(22,22,22,0.12)] sm:left-5" />
 
         <div className="space-y-8 sm:space-y-10">
           {experiences.map((exp, i) => (
@@ -33,9 +33,9 @@ export default function Experience() {
               transition={{ duration: 0.38, delay: i * 0.07, ease: "easeOut" }}
               className="relative pl-8 sm:pl-14"
             >
-              <div className="absolute left-[6px] sm:left-[14px] top-2 w-3 h-3 rounded-full border-2 border-teal bg-ocean shadow-[0_0_8px_rgba(13,214,200,0.5)]" />
+              <div className="clay-icon absolute left-[2px] top-2 h-4 w-4 sm:left-[10px]" />
 
-              <div className="bg-[rgba(13,214,200,0.03)] border border-[rgba(13,214,200,0.1)] rounded-lg p-4 sm:p-5 hover:border-[rgba(13,214,200,0.28)] transition-colors">
+              <div className="clay-card clay-peach p-4 sm:p-5">
                 <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
                   <div>
                     <h3 className="font-semibold text-snow text-base">{exp.role}</h3>
@@ -43,7 +43,7 @@ export default function Experience() {
                       <Briefcase size={12} /> {exp.org}
                     </p>
                   </div>
-                  <span className="text-xs text-snow border border-[rgba(255,255,255,0.15)] px-2.5 py-1 rounded shrink-0">
+                  <span className="clay-chip shrink-0 px-2.5 py-1 text-xs font-bold">
                     {exp.dates}
                   </span>
                 </div>
@@ -58,8 +58,7 @@ export default function Experience() {
 
                 <div className="flex flex-wrap gap-1.5">
                   {exp.tags.map((tag) => (
-                    <span key={tag}
-                      className="text-[10px] px-2 py-0.5 rounded bg-[rgba(13,214,200,0.07)] text-snow border border-[rgba(13,214,200,0.18)]">
+                    <span key={tag} className="clay-chip px-2.5 py-1 text-[10px] font-bold">
                       {tag}
                     </span>
                   ))}
