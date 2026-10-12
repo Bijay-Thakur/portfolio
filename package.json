@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test:v2": "tsc --module commonjs --moduleResolution node --target es2020 --esModuleInterop --skipLibCheck --outDir .next/v2-tests tests/v2/physics.test.ts lib/v2/physics.ts lib/v2/input.ts && node --test .next/v2-tests/tests/v2/physics.test.js"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

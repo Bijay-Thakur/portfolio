@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Nunito } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import PageLoader from "@/components/ui/PageLoader";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 
-// Load only the two weights we actually use — cuts download by ~60%
-const cormorant = Cormorant_Garamond({
+// Use the same Latin font files locally so offline builds stay reproducible.
+const cormorant = localFont({
+  src: "./fonts/cormorant-garamond-latin.woff2",
   variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: "400 600",
   display: "swap",
 });
 
-const nunito = Nunito({
+const nunito = localFont({
+  src: "./fonts/nunito-latin.woff2",
   variable: "--font-nunito",
-  subsets: ["latin"],
-  weight: ["500", "700", "800"],
+  weight: "500 800",
   display: "swap",
 });
 

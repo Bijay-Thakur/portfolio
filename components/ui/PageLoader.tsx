@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function PageLoader() {
+  const pathname = usePathname();
   const [progress, setProgress] = useState(0);
   const [leaving, setLeaving] = useState(false);
   const [gone, setGone] = useState(false);
@@ -39,7 +41,7 @@ export default function PageLoader() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  if (gone) return null;
+  if (gone || pathname === "/v2") return null;
 
   return (
     <div
