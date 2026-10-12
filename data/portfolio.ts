@@ -91,9 +91,23 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "#contact" },
 ];
 
-// ─── Featured Projects (5 headline) ──────────────────────────────────────────
+// ─── AI / ML projects ────────────────────────────────────────────────────────
 
-export const featuredProjects: Project[] = [
+export const aiProjects: Project[] = [
+  {
+    slug: "rag-sec-10k",
+    title: "SEC Insight AI",
+    category: "RAG Systems / Retrieval Evaluation",
+    summary:
+      "Source-grounded RAG over Apple's 2025 10-K. Manual Python pipeline plus LlamaIndex v2 with hybrid retrieval, BM25 + semantic RRF, cross-encoder reranking, citation-backed answers, and a 50-question gold evaluation set.",
+    tech: ["Python", "RAG", "LlamaIndex", "ChromaDB", "OpenAI", "BM25", "RAGAS", "Streamlit"],
+    highlight:
+      "Hybrid Recall@5: 0.86 · RAGAS Faithfulness: 0.99 · ~3s query latency (README evaluation set).",
+    repoUrl: "https://github.com/Bijay-Thakur/rag-sec-10k",
+    demoUrl: "https://rag-sec-10k-alpha.vercel.app",
+    linkLabel: "Live site",
+    badge: "Live",
+  },
   {
     slug: "rivalscope-ai",
     title: "RivalScope AI — Agentic Competitive Intelligence",
@@ -171,76 +185,6 @@ export const featuredProjects: Project[] = [
     repoUrl: "https://github.com/Bijay-Thakur/AI-Podcast-Generator",
     isFeatured: true,
   },
-];
-
-// ─── Production & client work ─────────────────────────────────────────────────
-
-export const productionProjects: Project[] = [
-  {
-    slug: "rag-sec-10k",
-    title: "SEC Insight AI — Production Financial QA System",
-    category: "RAG Systems / Retrieval Evaluation",
-    summary:
-      "Source-grounded RAG over Apple's 2025 10-K. Manual Python pipeline plus LlamaIndex v2 with hybrid retrieval, BM25 + semantic RRF, cross-encoder reranking, citation-backed answers, and a 50-question gold evaluation set.",
-    tech: ["Python", "RAG", "LlamaIndex", "ChromaDB", "OpenAI", "BM25", "RAGAS", "Streamlit"],
-    highlight:
-      "Hybrid Recall@5: 0.86 · RAGAS Faithfulness: 0.99 · ~3s query latency (README evaluation set).",
-    repoUrl: "https://github.com/Bijay-Thakur/rag-sec-10k",
-    demoUrl: "https://rag-sec-10k-alpha.vercel.app",
-    linkLabel: "Live site",
-    badge: "Live",
-  },
-  {
-    slug: "bronxville-natural-market",
-    title: "Bronxville Natural Market",
-    category: "Live product / E-commerce",
-    summary:
-      "Storefront for Bronxville Natural Market, a neighborhood shop for vitamins and natural supplements in Bronxville, NY. Visitors search the catalog, add items to a cart, and choose store pickup or local delivery. Customers manage an account; staff use admin tools for the catalog and the store.",
-    tech: ["Next.js", "React", "Vercel"],
-    highlight:
-      "Shipped and in use by the store and its customers — guest browsing, customer accounts, and admin catalog tools in one app.",
-    demoUrl: "https://supplement-market-snowy.vercel.app/",
-    linkLabel: "Live site",
-    badge: "Live",
-  },
-];
-
-export const contributionProjects: Project[] = [
-  {
-    slug: "webx-nepal",
-    title: "WebX Nepal",
-    category: "Agency site / Frontend",
-    summary:
-      "Public site for WebX Nepal, a Kathmandu studio for web development, branding, and digital marketing. I contributed substantially to the frontend — page structure, service sections, and responsive layout — as part of a larger site build.",
-    tech: ["React", "Next.js"],
-    highlight:
-      "Substantial frontend work on a live agency site used to present services, client stories, and enquiries.",
-    honestNote:
-      "Frontend contribution. The full product was a team build.",
-    demoUrl: "https://webxnepal.com/",
-    linkLabel: "Live site",
-    badge: "Contribution",
-  },
-  {
-    slug: "cvwn-nepal",
-    title: "CVWN Nepal",
-    category: "Nonprofit site / Frontend",
-    summary:
-      "Public site for the Conflict Victim Women National Network, a Nepal nonprofit supporting women affected by armed conflict. I contributed substantially to the frontend, including program sections, site navigation, and the district network view, as part of a larger site build.",
-    tech: ["React"],
-    highlight:
-      "Substantial frontend work on a live nonprofit site covering programs, events, and district outreach.",
-    honestNote:
-      "Frontend contribution. The full product was a team build.",
-    demoUrl: "https://cvwnnepal.org/",
-    linkLabel: "Live site",
-    badge: "Contribution",
-  },
-];
-
-// ─── Other Projects ───────────────────────────────────────────────────────────
-
-export const otherProjects: Project[] = [
   {
     slug: "glitchvision",
     title: "GlitchVision",
@@ -255,20 +199,6 @@ export const otherProjects: Project[] = [
       "https://github.com/Bijay-Thakur/GlitchVision---Visual-Anomaly-Detection-for-Game-QA",
   },
   {
-    slug: "storesense",
-    title: "StoreSense",
-    category: "Product MVP / Retail Analytics",
-    summary:
-      "Mobile-first retail SaaS MVP for small stores: reorder guidance, invoices, product insights, alerts, and Pro-preview market benchmarking. Built hackathon-ready with typed mock data and realistic UX.",
-    tech: ["Next.js", "React", "TypeScript", "Tailwind"],
-    highlight: "Polished hackathon MVP demonstrating workflow thinking with honest mock-data boundaries.",
-    honestNote: "Mock data only. No production AI, live POS, or real payments.",
-    repoUrl:
-      "https://github.com/Bijay-Thakur/StoreSense---AI-Profit-Leak-Assistant-for-Small-Stores",
-    demoUrl: "https://store-sense-ai-profit-leak-assistan.vercel.app",
-    isPrototype: true,
-  },
-  {
     slug: "resumeforge",
     title: "ResumeForge",
     category: "AI Career Tool / Multi-Agent UX",
@@ -280,12 +210,102 @@ export const otherProjects: Project[] = [
     repoUrl: "https://github.com/Bijay-Thakur/ResumeForge",
     isPrototype: true,
   },
+];
+
+// ─── Production projects with real users ─────────────────────────────────────
+
+export const productionProjects: Project[] = [
+  {
+    slug: "bronxville-natural-market",
+    title: "Bronxville Natural Market",
+    category: "Live product / E-commerce",
+    summary:
+      "Storefront for Bronxville Natural Market, a neighborhood shop for vitamins and natural supplements in Bronxville, NY. Visitors search the catalog, add items to a cart, and choose store pickup or local delivery. Customers manage an account; staff use admin tools for the catalog and the store.",
+    tech: ["Next.js", "React", "Vercel"],
+    highlight:
+      "Shipped and in use by the store and its customers — guest browsing, customer accounts, and admin catalog tools in one app.",
+    demoUrl: "https://supplement-market-snowy.vercel.app/",
+    linkLabel: "Live site",
+    badge: "Live",
+  },
+  {
+    slug: "webx-nepal",
+    title: "WebX Nepal",
+    category: "Live agency site",
+    summary:
+      "Public site for WebX Nepal, a Kathmandu studio for web development, branding, and digital marketing. I contributed substantially to the frontend — page structure, service sections, and responsive layout — as part of a larger site the studio uses with clients.",
+    tech: ["React", "Next.js"],
+    highlight:
+      "Live agency site used to present services, client stories, and enquiries. Frontend contribution on a team build.",
+    demoUrl: "https://webxnepal.com/",
+    linkLabel: "Live site",
+    badge: "Live",
+  },
+  {
+    slug: "cvwn-nepal",
+    title: "CVWN Nepal",
+    category: "Live nonprofit site",
+    summary:
+      "Public site for the Conflict Victim Women National Network, a Nepal nonprofit supporting women affected by armed conflict. I contributed substantially to the frontend, including program sections, site navigation, and the district network view.",
+    tech: ["React"],
+    highlight:
+      "Live nonprofit site covering programs, events, and district outreach. Frontend contribution on a team build.",
+    demoUrl: "https://cvwnnepal.org/",
+    linkLabel: "Live site",
+    badge: "Live",
+  },
+];
+
+// ─── Projects in progress ─────────────────────────────────────────────────────
+
+export const inProgressProjects: Project[] = [
+  {
+    slug: "pact",
+    title: "PACT",
+    category: "Agent infrastructure / In progress",
+    summary:
+      "Protocol for Agentic Commit Transactions. A commit layer that lets agents propose effects, then decides whether those effects may commit together, verifies what actually happened, and writes an accountable receipt. Phase 2.1 has local evidence; the next semantic-control phase is still open.",
+    tech: ["Python", "FastAPI", "PostgreSQL", "Next.js", "Pydantic", "Groq"],
+    highlight:
+      "A deterministic barrier checks authority, budgets, and invariants before effects reach an external system. Business providers in the current evidence are still simulated.",
+    repoUrl: "https://github.com/Bijay-Thakur/PACT---Protocol-for-Agentic-Commit-Transactions",
+    badge: "In progress",
+  },
+  {
+    slug: "novalearn",
+    title: "NovaLearn",
+    category: "Course workspace / In progress",
+    summary:
+      "Professor-led course workspace: objectives, connected modules, source-grounded materials, authentic assessments, and evidence review. Nova proposes and summarizes; the professor approves and decides. Students learn, demonstrate, and see professor feedback.",
+    tech: ["Next.js", "TypeScript", "Supabase", "OpenAI", "Gemini", "Three.js"],
+    highlight:
+      "Professor approval gates every release. Mastery is an uncalibrated pilot model, not a grade, and preview mode stays in the browser.",
+    repoUrl: "https://github.com/Bijay-Thakur/Nova-Learn",
+    badge: "In progress",
+  },
+  {
+    slug: "tea-amo",
+    title: "Tea Amo",
+    category: "Cafe operations / In progress",
+    summary:
+      "Cafe operating system for Tea Amo. Administration covers the floor, billing, menu, inventory, staff, and reports. Servers use a phone workspace for tables, orders, and payments. Accounts are created by an administrator.",
+    tech: ["JavaScript", "Supabase", "Vercel"],
+    highlight:
+      "Orders carry a version check so two phones cannot silently overwrite the same ticket, and payment writes are idempotent.",
+    repoUrl: "https://github.com/Bijay-Thakur/Tea-Amo",
+    badge: "In progress",
+  },
+];
+
+// ─── Hackathon projects ───────────────────────────────────────────────────────
+
+export const hackathonProjects: Project[] = [
   {
     slug: "chautari",
     title: "Chautari",
     category: "Hackathon / Full-Stack AI",
     summary:
-      "Team hackathon app (4 people): anonymous reflection space, Whisper transcription, GPT-4o-mini classification, Gemini resource suggestions, and Supabase realtime chat. Education/self-reflection only — not medical advice.",
+      "Team hackathon app (4 people): anonymous reflection space, Whisper transcription, GPT-4o-mini classification, Gemini resource suggestions, and Supabase realtime chat. Education and self-reflection only — not medical advice.",
     tech: ["Next.js", "TypeScript", "Supabase", "OpenAI", "Gemini", "Framer Motion"],
     highlight: "Culturally grounded UX with explicit non-medical disclaimers throughout.",
     honestNote:
@@ -295,13 +315,48 @@ export const otherProjects: Project[] = [
   {
     slug: "betaflow",
     title: "BetaFlow",
-    category: "Early Project",
+    category: "Hackathon / Early build",
     summary:
-      "Early Next.js + TypeScript project. Current repo evidence confirms scaffold setup — included for completeness.",
+      "Hackathon-era Next.js and TypeScript app. The public repository currently shows the project scaffold and default app setup.",
     tech: ["Next.js", "TypeScript"],
-    highlight: "Early learning project in the Next.js + TypeScript stack.",
-    honestNote: "Minimal README. Not claiming features beyond confirmed scaffold.",
+    highlight: "Early hackathon build in the Next.js and TypeScript stack.",
     repoUrl: "https://github.com/Bijay-Thakur/BetaFlow-",
+    isPrototype: true,
+  },
+  {
+    slug: "neuralfeedback",
+    title: "NeuralFeedback",
+    category: "Hackathon / Product feedback",
+    summary:
+      "Team hackathon app that turns a product idea into persona-based reviews. Reviewers are generated with Gemini, can be chatted with, and can answer by voice through ElevenLabs. A summary collects strengths and improvement areas.",
+    tech: ["Python", "Flask", "Gemini", "OpenAI", "ElevenLabs"],
+    highlight:
+      "Parallel persona reviews, follow-up chat, and voice calls. Team project; I contributed on the shared repository.",
+    repoUrl: "https://github.com/matheusfarocha/NeuralFeedback",
+  },
+  {
+    slug: "gc2go",
+    title: "GC2Go",
+    category: "Hackathon / Group travel",
+    summary:
+      "Team hackathon app that turns a travel reel into a plan the group can vote on. Gemini identifies the venue from the video, Google Maps grounding checks the place, and a later step builds a timed itinerary from availability, driver, and budget.",
+    tech: ["Next.js", "React", "Gemini", "Google Maps", "Zod", "TypeScript"],
+    highlight:
+      "Each Gemini step is schema-checked before the next one runs. My role on the team was AI/ML engineering.",
+    repoUrl: "https://github.com/Bijay-Thakur/gc2go",
+  },
+  {
+    slug: "storesense",
+    title: "StoreSense",
+    category: "Hackathon / Retail analytics",
+    summary:
+      "Mobile-first retail SaaS MVP for small stores: reorder guidance, invoices, product insights, alerts, and a Pro-preview market benchmark. Built hackathon-ready with typed mock data and a realistic workflow.",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind"],
+    highlight: "Hackathon MVP with honest mock-data boundaries and a clear store workflow.",
+    honestNote: "Mock data only. No production AI, live POS, or real payments.",
+    repoUrl:
+      "https://github.com/Bijay-Thakur/StoreSense---AI-Profit-Leak-Assistant-for-Small-Stores",
+    demoUrl: "https://store-sense-ai-profit-leak-assistan.vercel.app",
     isPrototype: true,
   },
 ];

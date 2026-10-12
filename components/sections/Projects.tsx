@@ -5,9 +5,9 @@ import { ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import SectionDivider from "@/components/ui/SectionDivider";
 import {
-  contributionProjects,
-  featuredProjects,
-  otherProjects,
+  aiProjects,
+  hackathonProjects,
+  inProgressProjects,
   productionProjects,
   type Project,
 } from "@/data/portfolio";
@@ -89,12 +89,12 @@ const sectionAnim = {
 export default function Projects() {
   return (
     <section id="projects" className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl 2xl:max-w-7xl mx-auto">
-      <SectionDivider label="In Production" />
+      <SectionDivider label="Production" />
 
       <motion.div {...sectionAnim} className="mb-10">
-        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">In Production</h2>
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">Production Projects</h2>
         <p className="text-muted text-sm max-w-xl">
-          Shipped products with live deployments — SEC Insight AI and the Bronxville Natural Market storefront.
+          Live products and sites with real users — Bronxville Natural Market, WebX Nepal, and CVWN Nepal.
         </p>
       </motion.div>
 
@@ -102,44 +102,43 @@ export default function Projects() {
         {productionProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
       </div>
 
-      <SectionDivider label="Featured Projects" />
+      <SectionDivider label="In Progress" />
 
       <motion.div {...sectionAnim} className="mb-10">
-        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">Featured Projects</h2>
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">Projects in Progress</h2>
         <p className="text-muted text-sm max-w-xl">
-          Headline projects spanning agentic competitive intelligence, multi-LLM
-          orchestration, multi-agent systems, applied ML, and GenAI media workflows.
+          Active builds — PACT, NovaLearn, and Tea Amo.
         </p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 mb-20 md:mb-24">
-        {featuredProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
+        {inProgressProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
       </div>
 
-      <SectionDivider label="Frontend Contributions" />
+      <SectionDivider label="AI / ML" />
 
       <motion.div {...sectionAnim} className="mb-10">
-        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">Frontend Contributions</h2>
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">AI / ML Projects</h2>
         <p className="text-muted text-sm max-w-xl">
-          Live sites where I did substantial frontend work as part of a larger build.
+          RAG, agentic systems, applied ML, and GenAI products, including SEC Insight AI and RivalScope AI.
         </p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 mb-20 md:mb-24">
-        {contributionProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
+        {aiProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
       </div>
 
-      <SectionDivider label="Other Projects" />
+      <SectionDivider label="Hackathons" />
 
       <motion.div {...sectionAnim} className="mb-10">
-        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">Other Projects</h2>
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-snow mb-3">Hackathon Projects</h2>
         <p className="text-muted text-sm max-w-xl">
-          Additional builds — hackathon MVPs, CV experiments, and early learning projects.
+          Hackathon builds — Chautari, BetaFlow, NeuralFeedback, GC2Go, and StoreSense.
         </p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
-        {otherProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
+        {hackathonProjects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
       </div>
     </section>
   );
