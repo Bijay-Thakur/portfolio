@@ -30,7 +30,7 @@ export function stepBike(s:BikeState,input:DriveInput,dt:number){
   if(input.brake)s.speed*=Math.exp(-13*d);
   s.speed=clamp(s.speed,-4.2,11.5);
   if(Math.abs(s.speed)<.03&&gas===0)s.speed=0;
-  const turn=Number(input.right)-Number(input.left);
+  const turn=Number(input.left)-Number(input.right);
   s.steer+=(turn-s.steer)*Math.min(1,d*9);
   const speed=Math.abs(s.speed),yaw=speed<.08?0:(.54+1.05*Math.min(speed/7,1));
   s.heading+=s.steer*Math.sign(s.speed)*yaw*d;
