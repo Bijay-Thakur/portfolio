@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 /** Thin reading-progress rail pinned above the navbar. */
 export default function ScrollProgress() {
+  const pathname = usePathname();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -21,6 +23,8 @@ export default function ScrollProgress() {
       window.removeEventListener("resize", update);
     };
   }, []);
+
+  if (pathname === "/" || pathname === "/v2") return null;
 
   return (
     <div

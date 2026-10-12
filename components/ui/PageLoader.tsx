@@ -41,7 +41,7 @@ export default function PageLoader() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  if (gone || pathname === "/v2") return null;
+  if (gone || pathname === "/" || pathname === "/v2") return null;
 
   return (
     <div

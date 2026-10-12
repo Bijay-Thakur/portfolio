@@ -1,6 +1,6 @@
 # Portfolio V2 redesign review
 
-The redesigned world is on the local `v2` branch at `/v2`. The classic portfolio and its content source remain at `/` and `data/portfolio.ts`. Nothing has been pushed, merged, or deployed.
+The redesigned world is the landing page at `/` (and remains available at `/v2`). The original plain portfolio is preserved at `/classic`; both read portfolio content from `data/portfolio.ts`. The `v2` branch was merged into local `main`. Nothing has been pushed or deployed.
 
 ## Preview
 
@@ -10,7 +10,7 @@ npm run build
 npm run start -- -p 3002
 ```
 
-Open http://localhost:3002/v2 on this computer. The permanent Skip link opens the classic portfolio. A private remote preview has not been created; the local build has not been deployed.
+Open http://localhost:3002/ on this computer. The permanent Skip link opens http://localhost:3002/classic. A private remote preview has not been created; the local build has not been deployed.
 
 ## What changed
 
@@ -23,8 +23,8 @@ Open http://localhost:3002/v2 on this computer. The permanent Skip link opens th
 ## Verification on October 12, 2026
 
 - `npm run build` and `npm run test:v2` passed. Eight focused tests cover route continuity, a complete simulated lap, all six reachable parking turnouts, parking eligibility, driving response, collision, respawn and independent input release.
-- Headless Chromium with software WebGL loaded the production `/v2` page at 1440×900, 390×844 and 844×390. Review captures are in [review](./review/): desktop intro, chase, moving, map and content; phone portrait intro and chase; phone landscape chase.
-- A browser keyboard press accelerated the bike to 25 km/h; two simultaneous emulated touch holds accelerated it to 31 km/h. Map Browse opened each of the six correct panels. The classic `/` route returned HTTP 200, and the Skip link points to it. The headless browser reported WebGL available and the loading overlay dismissed.
+- Headless Chromium with software WebGL loaded the production landing page at 1440×900, 390×844 and 844×390. Review captures are in [review](./review/): desktop intro, chase, moving, map and content; phone portrait intro and chase; phone landscape chase; and the preserved classic landing page.
+- Browser keyboard and two simultaneous emulated touch holds accelerated the bike. Map Browse opened each of the six correct panels. The classic `/classic` route and `/v2` alias returned HTTP 200, the Skip link points to `/classic`, and the legacy section routes redirect into the classic page. The headless browser reported WebGL available and the loading overlay dismissed.
 - The nine Blender GLBs total 1,329,120 bytes and contain no external textures. See [asset ledger](./assets.md).
 
 The supplied images are concept art. The runtime renders original geometry rather than an image backdrop. The separate `image.png` described in the attached plan as a before screenshot was not supplied, so there is no pixel accurate before comparison.

@@ -12,13 +12,13 @@ await mkdir(out,{recursive:true});
 const proc=spawn(edge,[
   "--no-sandbox","--enable-webgl","--use-gl=angle","--use-angle=swiftshader",
   "--enable-unsafe-swiftshader","--remote-debugging-port=9223","--remote-allow-origins=*","--no-first-run",
-  "--user-data-dir="+join(root,".next","v2-browser"),"http://localhost:3002/v2"
+  "--user-data-dir="+join(root,".next","v2-browser"),"http://localhost:3002/"
 ],{stdio:"ignore",windowsHide:true});
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let tab;
 for(let i=0;i<40;i++){try{
   const pages=await (await fetch("http://localhost:9223/json")).json();
-  tab=pages.find(p=>p.type==="page"&&p.url.includes("/v2"));
+  tab=pages.find(p=>p.type==="page"&&new URL(p.url).pathname==="/");
   if(tab)break;
 }catch{}await sleep(250);}
 if(!tab){proc.kill();throw new Error("Headless Edge did not expose the local page");}
@@ -74,8 +74,21 @@ await send("Emulation.setDeviceMetricsOverride",{width:844,height:390,deviceScal
 await send("Page.reload",{ignoreCache:true});await sleep(4000);
 await evaluate("document.querySelector('.v2-intro .v2-primary')?.click()");await sleep(1500);await shot("phone-landscape");
 console.log("screenshots",out);
-const classicStatus=(await fetch("http://localhost:3002/")).status;
+const classicResponse=await fetch("http://localhost:3002/classic");
+const classicStatus=classicResponse.status;
 const skip=await evaluate("document.querySelector('.v2-skip')?.getAttribute('href')");
-assert.equal(classicStatus,200);assert.equal(skip,"/");
+assert.equal(classicStatus,200);assert.equal(skip,"/classic");
+assert.match(await classicResponse.text(),/Classic Portfolio/);
+assert.equal((await fetch("http://localhost:3002/v2")).status,200);
+for(const section of ["about","projects","experience","contact"]){
+  const response=await fetch("http://localhost:3002/"+section,{redirect:"manual"});
+  assert.equal(response.status,307);
+  assert.equal(response.headers.get("location"),"/classic#"+section);
+}
 console.log("classic",classicStatus,"skip",skip);
+await send("Emulation.setDeviceMetricsOverride",{width:1440,height:900,deviceScaleFactor:1,mobile:false});
+await send("Page.navigate",{url:"http://localhost:3002/classic"});await sleep(1800);
+const classicPage=await evaluate("({title:document.title,hero:!!document.querySelector('#hero'),projects:!!document.querySelector('#projects'),contact:!!document.querySelector('#contact')})");
+assert.equal(classicPage.hero,true);assert.equal(classicPage.projects,true);assert.equal(classicPage.contact,true);
+console.log("classic page",classicPage);await shot("classic-home");
 ws.close();proc.kill();
