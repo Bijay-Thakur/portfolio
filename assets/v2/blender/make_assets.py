@@ -24,10 +24,12 @@ def mat(name, hex_color, metallic=0, roughness=.7):
     bsdf.inputs['Roughness'].default_value = roughness
     return m
 
-chalk=mat('porcelain chalk','F7F8FA'); pearl=mat('warm white','E6E8ED')
-stone=mat('light stone','C9CDD4'); steel=mat('satin graphite','565B64',.65,.35)
-ink=mat('deep ink','24272D',.28,.45); tire=mat('rubber','303238')
-silver=mat('brushed metal','B4BAC3',.8,.29); glass=mat('frosted glass','D8DDE5',.18,.22)
+chalk=mat('limestone chalk','EDEBE5'); pearl=mat('warm stone','D5D3CD')
+stone=mat('carved stone','ADADA9'); steel=mat('satin graphite','555A5B',.55,.48)
+ink=mat('deep ink','25292B',.22,.55); tire=mat('rubber','1C1F20')
+silver=mat('brushed metal','B7BBB9',.65,.38); glass=mat('blue grey glass','A9B8BB',.24,.23)
+pine=mat('deep evergreen','27332F'); bark=mat('weathered bark','504B47')
+amber=mat('lamp amber','F2D9AA')
 
 def part(obj, name, material, group):
     obj.name = name; obj.data.materials.append(material)
@@ -57,6 +59,16 @@ def beam(g,n,a,b,width,m):
     mid=(Vector(a)+Vector(b))/2; direction=Vector(b)-Vector(a)
     o=cube(g,n,mid,(width,width,direction.length),m,width*.18)
     o.rotation_euler=direction.to_track_quat('Z','Y').to_euler()
+    return o
+
+def face(g,n,points,m):
+    mesh=bpy.data.meshes.new(n+' geometry')
+    mesh.from_pydata(points, [], [tuple(range(len(points)))])
+    mesh.materials.append(m);mesh.update()
+    o=bpy.data.objects.new(n,mesh);g.objects.link(o)
+    solid=o.modifiers.new('real thickness','SOLIDIFY');solid.thickness=.12
+    bevel=o.modifiers.new('trimmed edge','BEVEL');bevel.width=.035;bevel.segments=2
+    o.modifiers.new('weighted normals','WEIGHTED_NORMAL')
     return o
 
 def label(g,n,text,loc,size,m,rotation=(math.pi/2,0,0)):
@@ -92,26 +104,39 @@ beam(g,'LowerFrameB',(0,.16,.48),(0,.62,.72),.08,steel)
 for x in [-.18,.18]:
     beam(g,'Fork',(x,-.88,.45),(x,-.72,1.13),.055,silver)
     beam(g,'RearSpring',(x,.7,.48),(x,.48,.82),.06,silver)
-cube(g,'SculptedTank',(0,-.26,1.04),(.62,.8,.38),chalk,.16)
-cube(g,'TankInlay',(0,-.27,1.236),(.36,.42,.018),steel,.08)
+cube(g,'SculptedTank',(0,-.26,1.04),(.62,.8,.38),ink,.16)
+cube(g,'TankInlay',(0,-.27,1.236),(.36,.42,.018),stone,.08)
 cube(g,'Saddle',(0,.53,1.02),(.55,.7,.12),ink,.06)
 cube(g,'SaddleStitch',(0,.54,1.086),(.4,.51,.009),silver,.04)
 cube(g,'Engine',(0,.12,.65),(.43,.46,.39),steel,.09)
 for i in range(4): cube(g,'EngineFin'+str(i),(0,.13,.51+i*.085),(.49,.49,.015),silver,.003)
 beam(g,'Handlebar',(-.45,-.89,1.27),(.45,-.89,1.27),.045,ink)
 beam(g,'HandleStem',(0,-.77,1.02),(0,-.89,1.27),.065,steel)
-cyl(g,'Headlamp',(0,-1.01,1.0),.18,.08,glass,24,(math.pi/2,0,0))
-cube(g,'RearLight',(0,1.0,.8),(.25,.07,.1),pearl,.03)
-cube(g,'FrontFender',(0,-.88,.87),(.36,.69,.06),chalk,.06)
-cube(g,'RearFender',(0,.8,.87),(.36,.63,.06),chalk,.06)
+cyl(g,'Headlamp',(0,-1.01,1.0),.18,.08,amber,24,(math.pi/2,0,0))
+torus(g,'Headlamp bezel',(0,-1.067,1.0),.19,.025,silver,(math.pi/2,0,0))
+cube(g,'RearLight',(0,1.0,.8),(.25,.07,.1),amber,.03)
+cube(g,'FrontFender',(0,-.88,.87),(.36,.69,.06),ink,.06)
+cube(g,'RearFender',(0,.8,.87),(.36,.63,.06),ink,.06)
+for x in [-.29,.29]:
+    beam(g,'Exhaust pipe',(x,.21,.51),(x,.96,.66),.085,silver)
+    cyl(g,'Exhaust end',(x,.97,.66),.075,.08,ink,16,(math.pi/2,0,0))
+    cube(g,'Boot',(x,.33,.69),(.19,.36,.15),tire,.035)
+    cube(g,'Glove',(x*.95,-.78,1.27),(.16,.18,.1),tire,.03)
+for y in [-.88,.79]:
+    cyl(g,'Brake rotor',(0,y,.43),.21,.014,steel,24,(0,math.pi/2,0))
+cube(g,'License plate',(0,1.07,.65),(.3,.035,.18),stone,.02)
+for x in [-.48,.48]:
+    cyl(g,'Turn signal',(x,-.91,1.03),.07,.1,amber,12,(math.pi/2,0,0))
 for x in [-.36,.36]:
     cyl(g,'Mirror',(x,-.88,1.42),.11,.025,glass,16,(math.pi/2,0,0))
     beam(g,'MirrorStem',(x*.82,-.88,1.27),(x,-.88,1.42),.025,steel)
 # Rider torso, helmet, arms and legs: purposely stylized silhouette.
 cube(g,'RiderTorso',(0,.40,1.54),(.48,.29,.63),ink,.13)
 bpy.ops.mesh.primitive_uv_sphere_add(segments=16, ring_count=8, radius=.24, location=(0,.30,2.07))
-part(bpy.context.object,'Helmet',chalk,g)
-cube(g,'Visor',(0,.115,2.06),(.33,.07,.13),steel,.045)
+part(bpy.context.object,'Helmet',ink,g)
+cube(g,'Visor',(0,.115,2.06),(.36,.07,.15),glass,.045)
+cube(g,'Helmet stripe',(0,.30,2.29),(.045,.34,.015),stone,.007)
+cube(g,'Rider shoulder',(0,.36,1.78),(.58,.34,.15),ink,.065)
 for x in [-.23,.23]:
     beam(g,'RiderArm',(x,.30,1.73),(x*.95,-.78,1.27),.095,ink)
     beam(g,'RiderLeg',(x,.5,1.35),(x*.9,.33,.79),.13,steel)
@@ -130,6 +155,9 @@ for x,t in [(-1.7,'01'),(-.55,'02'),(.55,'03'),(1.7,'04')]:
     label(g,'Pod numeral '+t,t,(x-.19,-1.09,1.45),.34,ink)
 beam(g,'Arched roof left',(-2.3,0,2.1),(0,0,2.86),.16,silver)
 beam(g,'Arched roof right',(0,0,2.86),(2.3,0,2.1),.16,silver)
+face(g,'Left gallery roof',[(-2.5,-1.2,2.18),(0,-1.2,3.42),(0,1.2,3.42),(-2.5,1.2,2.18)],pearl)
+face(g,'Right gallery roof',[(0,-1.2,3.42),(2.5,-1.2,2.18),(2.5,1.2,2.18),(0,1.2,3.42)],stone)
+face(g,'Glazed front gable',[(-1.14,-1.24,2.22),(1.14,-1.24,2.22),(0,-1.24,3.65)],glass)
 cube(g,'Project lintel',(0,.88,2.36),(5.0,.22,.22),stone,.06)
 label(g,'PROJECTS','PROJECTS',(-1.15,-1.25,2.43),.42,ink)
 for x in [-2.25,2.25]:
@@ -173,11 +201,21 @@ finish(g,'contacts')
 
 g=collection('About City'); plinth(g,'About',5.8)
 cube(g,'Studio floor',(0,.2,.38),(4.4,3.7,.23),chalk,.12)
+cube(g,'Cottage rear wall',(0,1.82,1.54),(4.27,.16,2.1),pearl,.06)
+for x in [-1.96,1.96]:
+    cube(g,'Cottage side wall',(x,.2,1.54),(.16,3.35,2.1),pearl,.06)
+for x in [-1.33,1.33]:
+    cube(g,'Cottage front wall',(x,-1.55,1.54),(1.33,.16,2.1),chalk,.06)
+cube(g,'Cottage door',(0,-1.63,1.35),(.98,.08,1.58),ink,.04)
+for x in [-1.42,1.42]:
+    cube(g,'Warm cottage window',(x,-1.66,1.7),(.62,.06,.72),glass,.04)
 for x in [-1.8,1.8]:
     for y in [-1.2,1.4]: cyl(g,'Studio column',(x,y,1.45),.13,2.0,silver,12)
 cube(g,'Cantilever roof',(0,.2,2.56),(4.8,3.9,.24),pearl,.13)
 beam(g,'Home roof left',(-2.24,.2,2.6),(0,.2,3.8),.15,ink)
 beam(g,'Home roof right',(0,.2,3.8),(2.24,.2,2.6),.15,ink)
+face(g,'Cottage roof left',[(-2.44,-1.84,2.62),(0,-1.84,3.87),(0,2.03,3.87),(-2.44,2.03,2.62)],ink)
+face(g,'Cottage roof right',[(0,-1.84,3.87),(2.44,-1.84,2.62),(2.44,2.03,2.62),(0,2.03,3.87)],steel)
 for y in [-1.4,1.7]:
     beam(g,'Home gable',(-2.24,y,2.58),(0,y,3.8),.1,steel)
     beam(g,'Home gable',(0,y,3.8),(2.24,y,2.58),.1,steel)
@@ -219,10 +257,10 @@ finish(g,'resume')
 
 # Reusable trees and roadside furniture, all original source geometry.
 g=collection('Street Props')
-cyl(g,'Tree trunk',(0,0,.72),.12,1.25,steel,10)
-for i,(r,z) in enumerate([(.74,1.32),(.62,1.77),(.42,2.17)]):
-    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1,radius=r,location=(0,0,z))
-    part(bpy.context.object,'Faceted canopy '+str(i),[pearl,stone,chalk][i],g)
+cyl(g,'Tree trunk',(0,0,.72),.12,1.25,bark,10)
+for i,(r,z) in enumerate([(.78,1.18),(.66,1.65),(.5,2.1)]):
+    bpy.ops.mesh.primitive_cone_add(vertices=9,radius1=r,radius2=.08,depth=.95,location=(0,0,z))
+    part(bpy.context.object,'Pine canopy '+str(i),pine,g)
 cube(g,'Bench seat',(4,0,.52),(1.35,.48,.13),chalk,.05)
 for x in [3.54,4.46]: cube(g,'Bench leg',(x,0,.3),(.1,.39,.42),steel,.025)
 beam(g,'Lamp mast',(8,0,.12),(8,0,2.72),.09,steel)
@@ -231,10 +269,10 @@ cube(g,'Lamp shade',(8,.64,2.67),(.35,.35,.12),chalk,.05)
 finish(g,'props')
 
 g=collection('Single Tree')
-cyl(g,'Tree trunk',(0,0,.72),.12,1.25,steel,10)
-for i,(r,z) in enumerate([(.74,1.32),(.62,1.77),(.42,2.17)]):
-    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1,radius=r,location=(0,0,z))
-    part(bpy.context.object,'Faceted canopy '+str(i),[pearl,stone,chalk][i],g)
+cyl(g,'Tree trunk',(0,0,.72),.12,1.25,bark,10)
+for i,(r,z) in enumerate([(.78,1.18),(.66,1.65),(.5,2.1)]):
+    bpy.ops.mesh.primitive_cone_add(vertices=9,radius1=r,radius2=.08,depth=.95,location=(0,0,z))
+    part(bpy.context.object,'Pine canopy '+str(i),pine,g)
 finish(g,'tree')
 
 # Arrange the editable source as an asset gallery after all origin-centered GLBs export.

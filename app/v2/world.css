@@ -3,6 +3,7 @@ body:has(.v2-app){overflow:hidden}
 .v2-app button,.v2-app select{cursor:pointer}
 .v2-app button:focus-visible,.v2-app a:focus-visible,.v2-app select:focus-visible,.v2-panel:focus-visible{outline:3px solid #545b66;outline-offset:3px}
 .v2-canvas{position:absolute!important;inset:0}
+.v2-canvas{touch-action:none}
 .v2-topbar{position:absolute;z-index:25;top:0;left:0;right:0;display:flex;align-items:center;gap:16px;padding:calc(env(safe-area-inset-top) + 12px) max(18px,env(safe-area-inset-right)) 12px max(18px,env(safe-area-inset-left));background:linear-gradient(#eef0f3ef,#eef0f300)}
 .v2-topbar a,.v2-topbar button,.v2-settings button,.v2-settings label,.v2-hud>button{border:1px solid #fff;background:#fffffff0;border-radius:999px;box-shadow:0 8px 22px #16161618,inset 0 2px 0 #fff;padding:10px 15px;color:#161616;font-weight:800;font-size:12px;text-decoration:none;white-space:nowrap}
 .v2-skip{order:0}
@@ -133,6 +134,58 @@ body:has(.v2-app){overflow:hidden}
 .v2-topbar{z-index:40}
 
 .v2-minimap{width:112px;height:112px;padding:5px;border-radius:22px;background:#fffffff0;border:1px solid #fff;box-shadow:0 10px 30px #1616161b}
+.v2-world-map{width:100%;max-width:430px;aspect-ratio:1;align-self:start;border-radius:22px;box-shadow:0 12px 34px #14191c27}
+.v2-map-layout{display:grid;grid-template-columns:minmax(230px, .8fr) minmax(0,1.2fr);gap:20px;align-items:start}
+.v2-map-layout .v2-map-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.v2-intro{left:clamp(18px,4vw,70px);top:58%;width:min(410px,calc(100% - 40px));padding:25px 27px}
+.v2-intro h1{font-size:clamp(42px,4.5vw,62px);margin:12px 0 15px}
+.v2-intro-actions{margin-top:17px}
+.v2-intro .v2-intro-hint{margin-top:17px}
+.v2-interact:disabled{cursor:default;background:#202528cf;border-color:#303635;box-shadow:0 8px 20px #10171721}
+.v2-volume input{width:66px;accent-color:#819a91}
+.v2-settings label.v2-volume{gap:5px}
+@media(max-width:700px){
+  .v2-intro{top:115px;transform:none;left:12px;right:12px;width:auto;padding:18px 20px}
+  .v2-intro h1{font-size:clamp(38px,10vw,47px);margin:10px 0 12px}
+  .v2-intro p{font-size:12px;line-height:1.5}
+  .v2-intro-actions{margin-top:14px}
+  .v2-intro button{padding:9px 12px}
+  .v2-intro .v2-intro-hint{margin-top:14px}
+  .v2-map-layout{grid-template-columns:1fr}
+  .v2-world-map{max-width:300px;justify-self:center}
+  .v2-map-layout .v2-map-grid{grid-template-columns:1fr}
+  .v2-interact span{display:none}
+  .v2-settings{display:grid;grid-template-columns:auto auto;gap:4px}
+  .v2-settings .v2-volume{grid-column:1 / -1;justify-content:center}
+}
+@media(max-width:700px) and (orientation:landscape){
+  .v2-settings{display:flex;top:calc(49px + env(safe-area-inset-top))}
+  .v2-volume{display:none!important}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .v2-app{min-height:0}
+  .v2-topbar{padding:4px 12px;background:linear-gradient(#eef0f3db,#eef0f300)}
+  .v2-topbar a,.v2-topbar button{padding:6px 9px;font-size:10px}
+  .v2-brand{font-size:20px}
+  .v2-touch{display:flex;justify-content:space-between;align-items:end;position:absolute;z-index:10;left:0;right:0;bottom:0;padding:0 12px 7px;pointer-events:none}
+  .v2-touch>div{display:flex;gap:6px;pointer-events:auto}
+  .v2-touch button{width:48px;height:48px;touch-action:none;user-select:none;border-radius:15px;background:#fffffff0;border:1px solid white;box-shadow:0 8px 20px #16161636;color:#24272d;font-weight:900;font-size:11px}
+  .v2-touch-drive{flex-direction:row;align-items:end}
+  .v2-touch-drive button:last-child{width:58px;height:58px;border-radius:50%;background:#161616;color:white}
+  .v2-hud{left:calc(155px + env(safe-area-inset-left));bottom:8px}
+  .v2-hud>div{min-width:110px;padding:7px 10px}
+  .v2-hud strong{font-size:17px}
+  .v2-minimap{width:48px;height:48px}
+  .v2-hud>button{display:none}
+  .v2-settings{right:12px;top:48px;bottom:auto}
+  .v2-settings .v2-volume{display:none!important}
+  .v2-interact{bottom:70px;font-size:11px;padding:8px 12px}
+  .v2-intro{left:5%;right:auto;top:60px;transform:none;width:min(440px,65%);padding:12px 17px}
+  .v2-intro h1{font-size:34px;margin:6px 0}
+  .v2-intro p{font-size:11px}
+  .v2-intro-actions{margin-top:8px}
+  .v2-intro .v2-intro-hint{margin-top:7px;font-size:9px}
+}
 
 @media(max-width:700px){.v2-minimap{width:76px;height:76px;padding:3px;border-radius:15px}
 .v2-hud{align-items:center}

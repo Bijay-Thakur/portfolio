@@ -1,45 +1,34 @@
-# Portfolio V2 local review
+# Portfolio V2 redesign review
 
-The playable world lives at `/v2` on local branch `v2`. The classic portfolio remains at `/`, with a persistent Skip link from the game. No branch has been pushed or deployed.
+The redesigned world is on the local `v2` branch at `/v2`. The classic portfolio and its content source remain at `/` and `data/portfolio.ts`. Nothing has been pushed, merged, or deployed.
 
-## Run
-
-From the repository root:
+## Preview
 
 ```powershell
 npm ci
-npm run dev
+npm run build
+npm run start -- -p 3002
 ```
 
-Open `http://localhost:3000/v2` on the same machine. To test the production build, run `npm run build` and `npm run start -- -p 3001`, then open `http://localhost:3001/v2`. A phone on the same network may be able to use the host's LAN address, subject to the local firewall and network routing; this has not been verified. There is no private remotely reachable preview URL because this environment cannot deploy the local branch without a push.
+Open http://localhost:3002/v2 on this computer. The permanent Skip link opens the classic portfolio. A private remote preview has not been created; the local build has not been deployed.
 
-## What is here
+## What changed
 
-- A continuous ring road around a 3D lagoon, three bridge crossings, rocky island sectors, a southern welcome plaza, mountains, trees, props, and six authored Blender landmarks. The overview camera draws from the supplied concept images while the layout and models are original.
-- A fixed 60 Hz arcade bike simulation with acceleration, coast, brake, reverse, directional steering, terrain adherence, landmark/prop/tree collision, lake and channel containment, checkpoints, respawn, and fast travel. The camera follows and shortens its arm when a landmark blocks the view.
-- Keyboard: W/Up throttle, S/Down reverse, A/Left and D/Right steer, Space brake, E/Enter interact, M map, R respawn, Escape close. Touch controls use separate captured pointers for throttle and steering; releasing one does not release the other.
-- Map browsing reaches all six destinations without driving. Semantic, focus managed panels render directly from `data/portfolio.ts`, including honest notes, badges, contribution credit, prototype labels, and resume/contact links. The commented NeuralSeek entry is not surfaced.
-- WebGL fallback, loading indicator, opt-in synthetic engine tone, Auto/Low/High quality, pause on hidden tab or blocking panel, reduced motion styling, and mobile safe area spacing.
+- Six separate cliff islands surround a lake in the reference arrangement: Project, Experience, Contacts above; About, Education, Resume below. Smooth asphalt, six supported arched bridges, parking terraces on the islands, pine groves, mountain silhouettes and waterfalls replace the old pale circular board.
+- Each Blender landmark has a distinct silhouette and a large numbered dark sign with its exact subtitle. The intro uses an aerial view; riding uses a closer chase view. The map shows the route, destinations and parking markers.
+- The bike can park only inside a painted bay while moving below the parking threshold. Passing near a city does not open content. Browse opens a panel directly; fast travel places the bike on an approach road. Closing a parked panel leaves the bike stopped at its checkpoint.
+- The fixed 60 Hz simulation has a continuous route boundary, cliff/landmark/tree collision, coast, brake, reverse, speed sensitive steering and checkpoint recovery. Keyboard and touch inputs retain independent holds and clear on release, cancel, blur, and hidden tab.
+- Optional procedural audio has engine, rolling/braking feedback, a quiet wind bed, parking and menu cues. It starts from a user gesture, starts muted on every visit, has a stored volume setting and fades while hidden or in panels. No audio files or third party sound assets are used.
 
-## Code map
+## Verification on October 12, 2026
 
-- `lib/v2/physics.ts`, `input.ts`, and `world-config.ts`: deterministic simulation, input ownership, collision positions, map geometry.
-- `lib/v2/content.ts`: sole adapter for existing factual portfolio data.
-- `components/v2/WorldScene.tsx`: R3F scene and camera.
-- `components/v2/PortfolioGame.tsx`: UI and controls.
-- `assets/v2/blender/` and `public/v2/models/`: editable Blender source and runtime GLBs. See [asset ledger](./assets.md).
+- `npm run build` and `npm run test:v2` passed. Eight focused tests cover route continuity, a complete simulated lap, all six reachable parking turnouts, parking eligibility, driving response, collision, respawn and independent input release.
+- Headless Chromium with software WebGL loaded the production `/v2` page at 1440×900, 390×844 and 844×390. Review captures are in [review](./review/): desktop intro, chase, moving, map and content; phone portrait intro and chase; phone landscape chase.
+- A browser keyboard press accelerated the bike to 25 km/h; two simultaneous emulated touch holds accelerated it to 31 km/h. Map Browse opened each of the six correct panels. The classic `/` route returned HTTP 200, and the Skip link points to it. The headless browser reported WebGL available and the loading overlay dismissed.
+- The nine Blender GLBs total 1,329,120 bytes and contain no external textures. See [asset ledger](./assets.md).
 
-## Checks and measurements
+The supplied images are concept art. The runtime renders original geometry rather than an image backdrop. The separate `image.png` described in the attached plan as a before screenshot was not supplied, so there is no pixel accurate before comparison.
 
-On October 12, 2026, `npm run build` and `npm run test:v2` passed (six movement/input tests). A local production server returned HTTP 200 for `/`, `/v2`, all nine GLBs, and the resume PDF. `/v2` server HTML includes the Skip link before client JavaScript runs. The nine GLBs total **1,250,776 bytes**. The `/v2` HTML was **11,158 bytes**, and directly referenced initial JavaScript was **670,525 bytes** by HTTP Content-Length. These are transfer inventories, not a full browser waterfall; dynamically loaded Three/R3F chunks and CSS are not included in that JavaScript number.
+## Remaining review
 
-The connected browser inventory exposed no usable browser tab. Therefore **desktop rendering, phone portrait/landscape rendering, actual multi-touch, FPS, first interactive frame time, link clicks, and visual V1 smoke behavior are not verified**. The 5/8 second and 8 MB compressed scene goals cannot be claimed from these measurements. Blender viewport inspection confirmed the motorcycle and Project landmark exports, but is not a gameplay screenshot.
-
-### Manual review script
-
-1. At 1440×900, load `/v2`; verify the full island overview and the Skip link during loading. Start riding, accelerate and steer around the ring, brake, reverse, collide with a landmark, recover with R, and visit each district physically.
-2. Press M. Use Browse for all six districts, inspect project grouping and links, open the resume, and test keyboard Tab, Shift+Tab, Escape, and panel scrolling. Use Fast travel to each place and verify the camera settles without clipping.
-3. Reload at 390×844 portrait and a landscape phone size. Hold GO and a steering button simultaneously, release each pointer independently, cancel a touch, switch tabs while holding GO, and confirm there is no stuck acceleration. Check safe areas, panel close, and the persistent Skip link.
-4. Compare Auto/Low/High frame pacing and shadow detail, toggle sound, enable reduced motion, and test WebGL unavailable/lost behavior. Open `/` and verify its classic navigation and links.
-
-The current models are intentionally stylized low polygon geometry. They interpret the concept images' grayscale island, bridges, and recognizable districts rather than attempting photoreal fidelity. Real device review remains necessary before any merge.
+The simulated route and browser checks do not replace a person riding a complete lap and parking at every bay on a laptop and phone. Real device frame rate, true multi touch feel, audio balance, sign readability at distance, WebGL fallback and link destinations still need a device review. The design is intentionally stylized and simpler than the reference renders, especially in cliff detail, bridges and foliage.
